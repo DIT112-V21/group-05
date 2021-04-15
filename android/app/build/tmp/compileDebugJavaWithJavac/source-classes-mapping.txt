@@ -1,0 +1,16 @@
+com/example/mainactivity/ControlCarActivity.java
+ com.example.mainactivity.ControlCarActivity
+com/example/mainactivity/MainActivity.java
+ com.example.mainactivity.MainActivity
+com/example/mainactivity/SettingsSupportActivity.java
+ com.example.mainactivity.SettingsSupportActivity
+com/example/mainactivity/SettingsButtonActivity.java
+ com.example.mainactivity.SettingsButtonActivity
+com/example/mainactivity/ConnectCarActivity.java
+ com.example.mainactivity.ConnectCarActivity
+com/example/mainactivity/SettingsLanguageActivity.java
+ com.example.mainactivity.SettingsLanguageActivity
+com/example/mainactivity/BuildConfig.java
+ com.example.mainactivity.BuildConfig
+com/example/mainactivity/SettingsActivity.java
+ com.example.mainactivity.SettingsActivity
