@@ -33,7 +33,7 @@ void loop()
    avoidObstacle();
 }
 bool forward;
-bool reverse;
+bool back;
 
 void handleInput()
 {
@@ -44,7 +44,7 @@ void handleInput()
         if (input.startsWith("f"))
         {
             forward = true;
-            reverse = false;
+            back = false;
             unsigned int throttle = input.substring(1).toInt();
             car.setSpeed(throttle);
         }
@@ -52,7 +52,7 @@ void handleInput()
         else if (input.startsWith("r"))
         {
             forward = false;
-            reverse = true;
+            back = true;
             unsigned int throttle = input.substring(1).toInt();
             car.setSpeed((int) -throttle);
         }
@@ -73,7 +73,7 @@ void handleInput()
         else if (input.startsWith("s"))
         {
             forward = false;
-            reverse = false;
+            back = false;
             car.setSpeed(0);
         }
     }
@@ -95,7 +95,7 @@ void avoidObstacle()
          }*/
     }
     //checks obstacle infront of car using infrared sensor
-    else if(reverse && infraRedDistance > 0 && infraRedDistance < 100)
+    else if(back && infraRedDistance > 0 && infraRedDistance < 100)
     {
       car.setSpeed(0);
          delay(500);
