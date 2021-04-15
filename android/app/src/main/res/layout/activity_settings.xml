@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    tools:context=".SettingsActivity">
+
+    <Button
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Language"
+        android:layout_weight=".333333"/>
+
+    <Button
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Button Layout"
+        android:layout_weight=".333333"/>
+
+    <Button
+        android:id="@+id/supportUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Support Us"
+        android:layout_weight=".333333"/>
+</LinearLayout>
