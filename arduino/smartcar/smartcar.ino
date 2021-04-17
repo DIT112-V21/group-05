@@ -5,6 +5,7 @@ const int ECHO_PIN                  = 7;
 const unsigned int MAX_DISTANCE     = 300;
 const int BACK_IR_PIN               = 3;
 const int SPEED_LIMIT               = 70;
+const int REVERSE_SPEED_LIMIT       = 30;
 
 
 ArduinoRuntime arduinoRuntime;
@@ -112,8 +113,18 @@ void avoidObstacle()
 
 int speedLimiter(int throttle)
 {
-    if (throttle > SPEED_LIMIT){
+    if (throttle > SPEED_LIMIT)
+    {
         throttle = SPEED_LIMIT;
+    }
+    return throttle;
+}
+
+int reverseSpeedLimiter(int throttle)
+{
+    if (throttle > REVERSE_SPEED_LIMIT)
+    {
+        throttle = REVERSE_SPEED_LIMIT;
     }
     return throttle;
 }
