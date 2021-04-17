@@ -4,7 +4,7 @@ const int TRIGGER_PIN               = 6;
 const int ECHO_PIN                  = 7;
 const unsigned int MAX_DISTANCE     = 300;
 const int BACK_IR_PIN               = 3;
-const int SPEED_LIMIT               = 80;
+const int SPEED_LIMIT               = 70;
 
 
 ArduinoRuntime arduinoRuntime;
@@ -87,7 +87,7 @@ void avoidObstacle()
     int ultraSonicDistance = frontUltraSonic.getDistance();
     int infraRedDistance = backInfraRed.getDistance();
     //checks obstacle infront of car using ultrasonic sensor
-    if (forward && ultraSonicDistance > 0 && ultraSonicDistance < 100)
+    if (forward && ultraSonicDistance > 0 && ultraSonicDistance < 50)
     {
          car.setSpeed(0);
          delay(500);
@@ -98,7 +98,7 @@ void avoidObstacle()
          }*/
     }
     //checks obstacle infront of car using infrared sensor
-    else if(back && infraRedDistance > 0 && infraRedDistance < 100)
+    else if(back && infraRedDistance > 0 && infraRedDistance < 50)
     {
       car.setSpeed(0);
          delay(500);
