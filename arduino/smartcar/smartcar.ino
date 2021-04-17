@@ -57,7 +57,7 @@ void handleInput()
             forward = false;
             back = true;
             unsigned int throttle = input.substring(1).toInt();
-            throttle = speedLimiter(throttle);
+            throttle = reverseSpeedLimiter(throttle);
             car.setSpeed((int) -throttle);
         }
         else if (input.startsWith("tr"))
