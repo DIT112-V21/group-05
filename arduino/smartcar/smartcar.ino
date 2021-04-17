@@ -4,6 +4,7 @@ const int TRIGGER_PIN               = 6;
 const int ECHO_PIN                  = 7;
 const unsigned int MAX_DISTANCE     = 300;
 const int BACK_IR_PIN               = 3;
+const int SPEED_LIMIT               = 80;
 
 
 ArduinoRuntime arduinoRuntime;
@@ -46,7 +47,8 @@ void handleInput()
             forward = true;
             back = false;
             unsigned int throttle = input.substring(1).toInt();
-            car.setSpeed(throttle);
+            throttle = speedLimiter(throttle);
+            car.setSpeed((int)throttle);
         }
         //set reverse speed to input value in kilometers per hour
         else if (input.startsWith("r"))
@@ -54,6 +56,7 @@ void handleInput()
             forward = false;
             back = true;
             unsigned int throttle = input.substring(1).toInt();
+            throttle = speedLimiter(throttle);
             car.setSpeed((int) -throttle);
         }
         else if (input.startsWith("tr"))
@@ -105,4 +108,12 @@ void avoidObstacle()
          car.setSpeed(0);
          }*/
     }
+}
+
+int speedLimiter(int throttle)
+{
+    if (throttle > SPEED_LIMIT){
+        throttle = SPEED_LIMIT;
+    }
+    return throttle;
 }
