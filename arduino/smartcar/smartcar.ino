@@ -6,6 +6,7 @@ const unsigned int MAX_DISTANCE     = 300;
 const int BACK_IR_PIN               = 3;
 const int SPEED_LIMIT               = 70;
 const int REVERSE_SPEED_LIMIT       = 30;
+const int STOP_AT                   = 50;
 
 bool forward = false;
 bool back = false;
@@ -106,46 +107,26 @@ void powerSwitch(int inputChoice) {
 
 void avoidObstacle() 
 {
-    int ultraSonicDistance = frontUltraSonic.getDistance();
-    int infraRedDistance = backInfraRed.getDistance();
-    //checks obstacle infront of car using ultrasonic sensor
-    if (forward && ultraSonicDistance > 0 && ultraSonicDistance < 50)
-    {
+    int frontDistance = frontUltraSonic.getDistance();
+    int rearDistance = backInfraRed.getDistance();
+    
+    bool frontObstacle = forward && frontDistance > 0 && frontDistance < STOP_AT;
+    bool rearObstacle = back && rearDistance > 0 && rearDistance < STOP_AT;
+    
+    if (frontObstacle || rearObstacle) {
          car.setSpeed(0);
          delay(500);
-         /*if (!(infraRedDistance > 0 && infraRedDistance < 100)){
-         car.setSpeed(-50);
-         delay(1500);
-         car.setSpeed(0);
-         }*/
-    }
-    //checks obstacle infront of car using infrared sensor
-    else if(back && infraRedDistance > 0 && infraRedDistance < 50)
-    {
-      car.setSpeed(0);
-         delay(500);
-         /*if (!(ultraSonicDistance > 0 && ultraSonicDistance < 100)){
-         car.setSpeed(50);
-         delay(1500);
-         car.setSpeed(0);
-         }*/
     }
 }
 
 int speedLimiter(int throttle)
 {
-    if (throttle > SPEED_LIMIT)
-    {
+    if (forward && throttle > SPEED_LIMIT) {
         throttle = SPEED_LIMIT;
     }
-    return throttle;
-}
-
-int reverseSpeedLimiter(int throttle)
-{
-    if (throttle > REVERSE_SPEED_LIMIT)
-    {
+    else if(back && throttle > REVERSE_SPEED_LIMIT) {
         throttle = REVERSE_SPEED_LIMIT;
     }
+    
     return throttle;
 }
