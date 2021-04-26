@@ -6,7 +6,12 @@ const unsigned int MAX_DISTANCE     = 300;
 const int BACK_IR_PIN               = 3;
 const int SPEED_LIMIT               = 70;
 const int REVERSE_SPEED_LIMIT       = 30;
+const int STOP_AT                   = 50;
 
+bool forward = false;
+bool back = false;
+bool powerON = true;
+bool powerOFF = false;
 
 ArduinoRuntime arduinoRuntime;
 
@@ -34,97 +39,94 @@ void loop()
    handleInput();
    avoidObstacle();
 }
-bool forward;
-bool back;
 
-void handleInput()
-{
-    if (Serial.available())
-    {
+void handleInput() {
+    if (Serial.available()) {
         String input = Serial.readStringUntil('\n');
-        //set forward speed to input value in kilometers per hour
-        if (input.startsWith("f"))
-        {
-            forward = true;
-            back = false;
-            unsigned int throttle = input.substring(1).toInt();
-            throttle = speedLimiter(throttle);
-            car.setSpeed((int)throttle);
+        int inputChoice = input.substring(0).toInt();
+        powerSwitch(inputChoice);
+        if(powerON) {
+            int throttle;
+            int deg;
+            if(input.length() > 1) {
+              unsigned int throttleChoice = input.substring(1).toInt();
+              throttle = throttleChoice;
+              deg = throttleChoice;
         }
-        //set reverse speed to input value in kilometers per hour
-        else if (input.startsWith("r"))
-        {
-            forward = false;
-            back = true;
-            unsigned int throttle = input.substring(1).toInt();
-            throttle = reverseSpeedLimiter(throttle);
-            car.setSpeed((int) -throttle);
-        }
-        else if (input.startsWith("tr"))
-        {
-            int deg = input.substring(2).toInt();
-            car.setAngle(deg);
-        }
-         else if (input.startsWith("tl"))
-        {
-            int deg = input.substring(2).toInt();
-            car.setAngle(-deg);
-        }
-         else if (input.startsWith("ts"))
-        {
-            car.setAngle(0);
-        }
-        else if (input.startsWith("s"))
-        {
-            forward = false;
-            back = false;
-            car.setSpeed(0);
+            
+        switch(inputChoice) {
+            case 2: //move forward
+                forward = true;
+                back = false;
+                car.setSpeed(speedLimiter(throttle));
+                break;
+              
+              case 3: //reverse movement
+                forward = false;
+                back = true;
+                car.setSpeed(speedLimiter(-throttle));
+                break;
+            
+              case 4: //turn right
+                  car.setAngle(deg);
+                break;
+            
+              case 5: //turn left
+                  car.setAngle(-deg);
+                break;
+            
+              case 6: //stop turning
+                car.setAngle(0);
+                break;
+            
+              case 7: //stop movement
+                forward = false;
+                back = false;
+                car.setSpeed(0);
+                break;
+                
+              default:
+                break;
+            }
         }
     }
 }
 
+//Used to simulate an ON/OFF switch
+void powerSwitch(int inputChoice) {
+  if(inputChoice == 1) {
+    powerON = true;
+    powerOFF = false;
+  }
+  else if(inputChoice == 0) {
+    powerON = false;
+    powerOFF = true;
+    car.setSpeed(0);
+  }
+}
+
 void avoidObstacle() 
 {
-    int ultraSonicDistance = frontUltraSonic.getDistance();
-    int infraRedDistance = backInfraRed.getDistance();
-    //checks obstacle infront of car using ultrasonic sensor
-    if (forward && ultraSonicDistance > 0 && ultraSonicDistance < 50)
-    {
+    int frontDistance = frontUltraSonic.getDistance();
+    int rearDistance = backInfraRed.getDistance();
+    
+    bool frontObstacle = forward && frontDistance > 0 && frontDistance < STOP_AT;
+    bool rearObstacle = back && rearDistance > 0 && rearDistance < STOP_AT;
+    
+    if (frontObstacle || rearObstacle) {
          car.setSpeed(0);
          delay(500);
-         /*if (!(infraRedDistance > 0 && infraRedDistance < 100)){
-         car.setSpeed(-50);
-         delay(1500);
-         car.setSpeed(0);
-         }*/
-    }
-    //checks obstacle infront of car using infrared sensor
-    else if(back && infraRedDistance > 0 && infraRedDistance < 50)
-    {
-      car.setSpeed(0);
-         delay(500);
-         /*if (!(ultraSonicDistance > 0 && ultraSonicDistance < 100)){
-         car.setSpeed(50);
-         delay(1500);
-         car.setSpeed(0);
-         }*/
     }
 }
 
 int speedLimiter(int throttle)
 {
-    if (throttle > SPEED_LIMIT)
-    {
+    if (forward && throttle > SPEED_LIMIT) {
         throttle = SPEED_LIMIT;
     }
-    return throttle;
-}
-
-int reverseSpeedLimiter(int throttle)
-{
-    if (throttle > REVERSE_SPEED_LIMIT)
-    {
+    else if(back && throttle > REVERSE_SPEED_LIMIT) {
         throttle = REVERSE_SPEED_LIMIT;
     }
+    
     return throttle;
 }
