@@ -7,6 +7,10 @@ const int BACK_IR_PIN               = 3;
 const int SPEED_LIMIT               = 70;
 const int REVERSE_SPEED_LIMIT       = 30;
 
+bool forward = false;
+bool back = false;
+bool powerON = true;
+bool powerOFF = false;
 
 ArduinoRuntime arduinoRuntime;
 
@@ -34,53 +38,70 @@ void loop()
    handleInput();
    avoidObstacle();
 }
-bool forward;
-bool back;
 
-void handleInput()
-{
-    if (Serial.available())
-    {
+void handleInput() {
+    if (Serial.available()) {
         String input = Serial.readStringUntil('\n');
-        //set forward speed to input value in kilometers per hour
-        if (input.startsWith("f"))
-        {
-            forward = true;
-            back = false;
-            unsigned int throttle = input.substring(1).toInt();
-            throttle = speedLimiter(throttle);
-            car.setSpeed((int)throttle);
+        int inputChoice = input.substring(0).toInt();
+        powerSwitch(inputChoice);
+        if(powerON) {
+            int throttle;
+            int deg;
+            if(input.length() > 1) {
+              unsigned int throttleChoice = input.substring(1).toInt();
+              throttle = throttleChoice;
+              deg = throttleChoice;
         }
-        //set reverse speed to input value in kilometers per hour
-        else if (input.startsWith("r"))
-        {
-            forward = false;
-            back = true;
-            unsigned int throttle = input.substring(1).toInt();
-            throttle = reverseSpeedLimiter(throttle);
-            car.setSpeed((int) -throttle);
-        }
-        else if (input.startsWith("tr"))
-        {
-            int deg = input.substring(2).toInt();
-            car.setAngle(deg);
-        }
-         else if (input.startsWith("tl"))
-        {
-            int deg = input.substring(2).toInt();
-            car.setAngle(-deg);
-        }
-         else if (input.startsWith("ts"))
-        {
-            car.setAngle(0);
-        }
-        else if (input.startsWith("s"))
-        {
-            forward = false;
-            back = false;
-            car.setSpeed(0);
+            
+        switch(inputChoice) {
+            case 2: //move forward
+                forward = true;
+                back = false;
+                car.setSpeed(speedLimiter(throttle));
+                break;
+              
+              case 3: //reverse movement
+                forward = false;
+                back = true;
+                car.setSpeed(speedLimiter(-throttle));
+                break;
+            
+              case 4: //turn right
+                  car.setAngle(deg);
+                break;
+            
+              case 5: //turn left
+                  car.setAngle(-deg);
+                break;
+            
+              case 6: //stop turning
+                car.setAngle(0);
+                break;
+            
+              case 7: //stop movement
+                forward = false;
+                back = false;
+                car.setSpeed(0);
+                break;
+                
+              default:
+                break;
+            }
         }
     }
+}
+
+//Used to simulate an ON/OFF switch
+void powerSwitch(int inputChoice) {
+  if(inputChoice == 1) {
+    powerON = true;
+    powerOFF = false;
+  }
+  else if(inputChoice == 0) {
+    powerON = false;
+    powerOFF = true;
+    car.setSpeed(0);
+  }
 }
 
 void avoidObstacle() 
