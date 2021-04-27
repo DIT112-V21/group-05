@@ -1,19 +1,15 @@
 [
     {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_settings_support.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_settings_support.xml"
     },
     {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_settings_support.xml.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_settings_support.xml"
-    },
-    {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_launcher_background.xml"
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
@@ -24,16 +20,12 @@
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_nav_header.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/nav_header.xml"
+    },
+    {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_connect_car.xml.flat",
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_connect_car.xml"
-    },
-    {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_settings_language.xml.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_settings_language.xml"
     },
     {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_settings_button.xml.flat",
@@ -44,12 +36,60 @@
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_settings.xml"
     },
     {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_settings.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_connect.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_connect.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/menu_drawer_menu.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/menu/drawer_menu.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_mainmenu.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_mainmenu.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_settings_language.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_settings_language.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_burger.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_burger.xml"
+    },
+    {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_button_background.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/button_background.xml"
+    },
+    {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/drawable_ic_car.xml.flat",
+        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/drawable/ic_car.xml"
     },
     {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
@@ -74,13 +114,5 @@
     {
         "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/layout_activity_control_car.xml.flat",
         "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/layout/activity_control_car.xml"
-    },
-    {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/username/Desktop/carProject/group-05/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/username/Desktop/carProject/group-05/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
     }
 ]
