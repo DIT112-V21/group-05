@@ -10,56 +10,76 @@
 9        android:targetSdkVersion="30" />
 9-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml
 10
-11    <application
-11-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:5:5-25:19
-12        android:allowBackup="true"
-12-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:6:9-35
-13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-13-->[androidx.core:core:1.3.1] /Users/username/.gradle/caches/transforms-2/files-2.1/b234a824af7fd98a5c54fc0522824a91/core-1.3.1/AndroidManifest.xml:24:18-86
-14        android:debuggable="true"
-15        android:icon="@mipmap/ic_launcher"
-15-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:7:9-43
-16        android:label="@string/app_name"
-16-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:8:9-41
-17        android:roundIcon="@mipmap/ic_launcher_round"
-17-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:9:9-54
-18        android:supportsRtl="true"
-18-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:10:9-35
-19        android:testOnly="true"
-20        android:theme="@style/Theme.MainActivity" >
-20-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:11:9-50
-21        <activity android:name="com.example.mainactivity.ControlCarActivity" />
-21-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:12:9-65
-21-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:12:19-53
-22        <activity android:name="com.example.mainactivity.SettingsSupportActivity" />
-22-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:13:9-61
-22-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:13:19-58
-23        <activity android:name="com.example.mainactivity.SettingsButtonActivity" />
-23-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:14:9-60
-23-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:14:19-57
-24        <activity android:name="com.example.mainactivity.SettingsLanguageActivity" />
-24-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:15:9-62
-24-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:15:19-59
-25        <activity android:name="com.example.mainactivity.SettingsActivity" />
-25-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:16:9-54
-25-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:16:19-51
-26        <activity android:name="com.example.mainactivity.ConnectCarActivity" />
-26-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:17:9-56
-26-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:17:19-53
-27        <activity android:name="com.example.mainactivity.MainActivity" >
-27-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:18:9-24:20
-27-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:18:19-47
-28            <intent-filter>
-28-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:19:13-23:29
-29                <action android:name="android.intent.action.MAIN" />
-29-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:20:17-69
-29-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:20:25-66
-30
-31                <category android:name="android.intent.category.LAUNCHER" />
-31-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:22:17-77
-31-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:22:27-74
-32            </intent-filter>
-33        </activity>
-34    </application>
-35
-36</manifest>
+11    <uses-permission android:name="android.permission.WAKE_LOCK" />
+11-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:4:5-68
+11-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:4:22-65
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:5:5-67
+12-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:5:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:6:5-79
+13-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:6:22-76
+14    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+14-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:7:5-75
+14-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:7:22-72
+15
+16    <application
+16-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:9:5-32:19
+17        android:allowBackup="true"
+17-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:10:9-35
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.3.1] /Users/username/.gradle/caches/transforms-2/files-2.1/b234a824af7fd98a5c54fc0522824a91/core-1.3.1/AndroidManifest.xml:24:18-86
+19        android:debuggable="true"
+20        android:icon="@mipmap/ic_launcher"
+20-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:11:9-43
+21        android:label="@string/app_name"
+21-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:12:9-41
+22        android:roundIcon="@mipmap/ic_launcher_round"
+22-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:13:9-54
+23        android:supportsRtl="true"
+23-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:14:9-35
+24        android:testOnly="true"
+25        android:theme="@style/Theme.MainActivity" >
+25-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:15:9-50
+26        <service
+26-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:16:9-18:40
+27            android:name="org.eclipse.paho.android.service.MqttService"
+27-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:17:13-72
+28            android:exported="false" />
+28-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:18:13-37
+29
+30        <activity android:name="com.example.mainactivity.ControlCarActivity" />
+30-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:19:9-65
+30-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:19:19-53
+31        <activity android:name="com.example.mainactivity.SettingsSupportActivity" />
+31-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:20:9-61
+31-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:20:19-58
+32        <activity android:name="com.example.mainactivity.SettingsButtonActivity" />
+32-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:21:9-60
+32-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:21:19-57
+33        <activity android:name="com.example.mainactivity.SettingsLanguageActivity" />
+33-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:22:9-62
+33-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:22:19-59
+34        <activity android:name="com.example.mainactivity.SettingsActivity" />
+34-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:23:9-54
+34-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:23:19-51
+35        <activity android:name="com.example.mainactivity.ConnectCarActivity" />
+35-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:24:9-56
+35-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:24:19-53
+36        <activity android:name="com.example.mainactivity.MainActivity" >
+36-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:25:9-31:20
+36-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:25:19-47
+37            <intent-filter>
+37-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:26:13-30:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:27:17-69
+38-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:27:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:29:17-77
+40-->/Users/username/Desktop/carProject/group-05/android/app/src/main/AndroidManifest.xml:29:27-74
+41            </intent-filter>
+42        </activity>
+43    </application>
+44
+45</manifest>

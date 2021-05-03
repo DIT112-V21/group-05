@@ -1,9 +1,16 @@
+com/example/mainactivity/BuildConfig.java
+ com.example.mainactivity.BuildConfig
 com/example/mainactivity/ControlCarActivity.java
  com.example.mainactivity.ControlCarActivity
  com.example.mainactivity.ControlCarActivity$1
+ com.example.mainactivity.ControlCarActivity$2
+ com.example.mainactivity.ControlCarActivity$3
+ com.example.mainactivity.ControlCarActivity$4
 com/example/mainactivity/MainActivity.java
  com.example.mainactivity.MainActivity
  com.example.mainactivity.MainActivity$1
+com/example/mainactivity/MqttClient.java
+ com.example.mainactivity.MqttClient
 com/example/mainactivity/SettingsSupportActivity.java
  com.example.mainactivity.SettingsSupportActivity
  com.example.mainactivity.SettingsSupportActivity$1
@@ -16,8 +23,6 @@ com/example/mainactivity/ConnectCarActivity.java
 com/example/mainactivity/SettingsLanguageActivity.java
  com.example.mainactivity.SettingsLanguageActivity
  com.example.mainactivity.SettingsLanguageActivity$1
-com/example/mainactivity/BuildConfig.java
- com.example.mainactivity.BuildConfig
 com/example/mainactivity/SettingsActivity.java
  com.example.mainactivity.SettingsActivity
  com.example.mainactivity.SettingsActivity$1

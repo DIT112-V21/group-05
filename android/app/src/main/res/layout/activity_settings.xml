@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:weightSum="1"
             tools:context=".SettingsActivity"
-            android:padding="5dp">
+            android:padding="8dp">
 
             <Button
                 android:id="@+id/language"
