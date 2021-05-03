@@ -1,4 +1,15 @@
 #include <Smartcar.h>
+#include <MQTT.h>
+#include <WiFi.h>
+
+#ifdef __SMCE__
+#include <OV767X.h>
+#endif
+
+#ifndef __SMCE__
+WiFiClient net;
+#endif
+MQTTClient mqtt;
 
 const int TRIGGER_PIN               = 6;
 const int ECHO_PIN                  = 7;
@@ -32,17 +43,35 @@ SimpleCar car(control);
 
 void setup() {
     Serial.begin(9600);
+    #ifdef __SMCE__
+    mqtt.begin("aerostun.dev", 1883, WiFi);
+    #endif
+    if (mqtt.connect("arduino", "public", "public")) {
+    mqtt.subscribe("/group05/control/#", 1);
+    mqtt.onMessage([](String topic, String message) {
+      if (topic == "/group05/control/handleInput") {
+        handleInput(message);
+      }
+      else {
+        Serial.println(topic + " " + message);
+      }
+    });
+  }
 }
 
-void loop()
-{
-   handleInput();
-   avoidObstacle();
+void loop() {
+    if (mqtt.connected()) {
+    mqtt.loop();
+    avoidObstacle();
+    #ifdef __SMCE__
+    delay(35);
+    #endif
+    }
+    //handleInput();
+    avoidObstacle();
 }
 
-void handleInput() {
-    if (Serial.available()) {
-        String input = Serial.readStringUntil('\n');
+void handleInput(String input) {
         int inputChoice = input.substring(0).toInt();
         powerSwitch(inputChoice);
         if(powerON) {
@@ -52,10 +81,10 @@ void handleInput() {
               unsigned int throttleChoice = input.substring(1).toInt();
               throttle = throttleChoice;
               deg = throttleChoice;
-        }
+            }
             
-        switch(inputChoice) {
-            case 2: //move forward
+            switch(inputChoice) {
+              case 2: //move forward
                 forward = true;
                 back = false;
                 car.setSpeed(speedLimiter(throttle));
@@ -64,7 +93,7 @@ void handleInput() {
               case 3: //reverse movement
                 forward = false;
                 back = true;
-                car.setSpeed(speedLimiter(-throttle));
+                car.setSpeed(-speedLimiter(throttle));
                 break;
             
               case 4: //turn right
@@ -82,6 +111,7 @@ void handleInput() {
               case 7: //stop movement
                 forward = false;
                 back = false;
+                car.setAngle(0);
                 car.setSpeed(0);
                 break;
                 
@@ -89,7 +119,6 @@ void handleInput() {
                 break;
             }
         }
-    }
 }
 
 //Used to simulate an ON/OFF switch
