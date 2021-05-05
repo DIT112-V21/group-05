@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ControlCarActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ControlCarActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="51dp">
+
+        <ImageButton
+            android:id="@+id/forwardButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="160dp"
+            android:layout_marginBottom="205dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="forwardThrottle"
+            android:scaleType="fitXY"
+            android:src="@drawable/forward_button"
+            app:layout_constraintBottom_toTopOf="@+id/backwardButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9"
+            tools:layout_editor_absoluteX="67dp" />
+
+        <ImageButton
+            android:id="@+id/backwardButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="160dp"
+            android:layout_marginBottom="35dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="reverseThrottle"
+            android:scaleType="fitXY"
+            android:src="@drawable/back_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="67dp" />
+
+        <ImageButton
+            android:id="@+id/breakButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="168dp"
+            android:layout_marginBottom="128dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="stop"
+            android:scaleType="fitXY"
+            android:src="@drawable/break_button"
+            app:layout_constraintEnd_toStartOf="@+id/rightButton"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <ImageButton
+            android:id="@+id/leftButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="245dp"
+            android:layout_marginBottom="120dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="turnLeft"
+            android:scaleType="fitXY"
+            android:src="@drawable/left_button"
+            app:layout_constraintBottom_toTopOf="@+id/backwardButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9"
+            tools:layout_editor_absoluteX="67dp" />
+
+        <ImageButton
+            android:id="@+id/rightButton"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="75dp"
+            android:layout_marginBottom="120dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="turnRight"
+            android:scaleType="fitXY"
+            android:src="@drawable/right_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <ImageButton
+            android:id="@+id/neutralSteeringButtonRight"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="83dp"
+            android:layout_marginBottom="43dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="stopTurn"
+            android:scaleType="fitXY"
+            android:src="@drawable/neutral_steering_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <ImageButton
+            android:id="@+id/neutralSteeringButtonLeft"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="253dp"
+            android:layout_marginBottom="43dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="stopTurn"
+            android:scaleType="fitXY"
+            android:src="@drawable/neutral_steering_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <ImageButton
+            android:id="@+id/turnPhoneButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="88dp"
+            android:layout_marginBottom="218dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="changeScreenOrientation"
+            android:scaleType="fitXY"
+            android:src="@drawable/turn_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <ImageButton
+            android:id="@+id/onPowerButton"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="245dp"
+            android:layout_marginBottom="224dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="forwardThrottle"
+            android:scaleType="fitXY"
+            android:src="@drawable/on_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+
+        <ImageButton
+            android:id="@+id/offPowerButton"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="283dp"
+            android:layout_marginBottom="224dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:onClick="stop"
+            android:scaleType="fitXY"
+            android:src="@drawable/off_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="270dp" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
