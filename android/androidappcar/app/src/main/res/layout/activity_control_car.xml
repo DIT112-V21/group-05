@@ -13,6 +13,13 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="51dp">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:layout_weight="0.3"
+            android:contentDescription="cameraView" />
+
         <ImageButton
             android:id="@+id/forwardButton"
             android:layout_width="75dp"
