@@ -48,7 +48,7 @@ public class ControlCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_car);
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
-        //mCameraView = findViewById(R.id.imageView);
+        mCameraView = findViewById(R.id.imageView);
 
         connectToMqttBroker();
     }
@@ -87,8 +87,8 @@ public class ControlCarActivity extends AppCompatActivity {
                     Log.i(TAG, successfulConnection);
                     Toast.makeText(getApplicationContext(), successfulConnection, Toast.LENGTH_SHORT).show();
 
-                    mMqttClient.subscribe("/smartcar/ultrasound/front", QOS, null);
-                    mMqttClient.subscribe("/smartcar/camera", QOS, null);
+                    //mMqttClient.subscribe("/smartcar/ultrasound/front", QOS, null);
+                    mMqttClient.subscribe("/group/05/camera", QOS, null);
                 }
 
                 @Override
@@ -110,7 +110,7 @@ public class ControlCarActivity extends AppCompatActivity {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-                    if (topic.equals("/smartcar/camera")) {
+                    if (topic.equals("/group/05/camera")) {
                         final Bitmap bm = Bitmap.createBitmap(IMAGE_WIDTH, IMAGE_HEIGHT, Bitmap.Config.ARGB_8888);
 
                         final byte[] payload = message.getPayload();
