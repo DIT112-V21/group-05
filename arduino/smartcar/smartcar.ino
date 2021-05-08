@@ -1,26 +1,33 @@
+#include <Smartcar.h>
 #include <MQTT.h>
 #include <WiFi.h>
+#include <vector>
+
 #ifdef __SMCE__
 #include <OV767X.h>
 #endif
-
-#include <Smartcar.h>
 
 #ifndef __SMCE__
 WiFiClient net;
 #endif
 MQTTClient mqtt;
 
+//Camera
+const auto oneSecond = 1000UL;
+//Ultrasonic sensor
 const int TRIGGER_PIN               = 6;
 const int ECHO_PIN                  = 7;
 const unsigned int MAX_DISTANCE     = 300;
+//Infrared sensor
 const int BACK_IR_PIN               = 3;
+//Car speed values
 const int SPEED_LIMIT               = 70;
 const int REVERSE_SPEED_LIMIT       = 30;
 const int STOP_AT                   = 50;
-
+//Directional booleans
 bool forward = false;
 bool back = false;
+//Power simulator
 bool powerON = true;
 bool powerOFF = false;
 
@@ -41,11 +48,20 @@ GP2D120 backInfraRed(arduinoRuntime, BACK_IR_PIN);
 
 SimpleCar car(control);
 
+//Used for Camera
+std::vector<char> frameBuffer;
+
+
 void setup() {
     Serial.begin(9600);
-    #ifdef __SMCE__
+#ifdef __SMCE__
+    Camera.begin(QVGA, RGB888, 15);
+    frameBuffer.resize(Camera.width() * Camera.height() * Camera.bytesPerPixel());
     mqtt.begin("aerostun.dev", 1883, WiFi);
-    #endif
+#else
+    mqtt.begin(net);
+    //mqtt.begin("aerostun.dev", 1883, WiFi);
+#endif
     if (mqtt.connect("arduino", "public", "public")) {
     mqtt.subscribe("/group05/control/#", 1);
     mqtt.onMessage([](String topic, String message) {
@@ -62,14 +78,27 @@ void setup() {
 void loop() {
     if (mqtt.connected()) {
     mqtt.loop();
+    const auto currentTime = millis();
     avoidObstacle();
-    #ifdef __SMCE__
-    delay(35);
-    #endif
+#ifdef __SMCE__
+    static auto previousFrame = 0UL;
+    if (currentTime - previousFrame >= 65) {
+      previousFrame = currentTime;
+      Camera.readFrame(frameBuffer.data());
+      mqtt.publish("/group/05/camera", frameBuffer.data(), frameBuffer.size(),
+                   false, 0);
+    }
+#endif
+#ifdef __SMCE__
+  // Avoid over-using the CPU if we are running in the emulator
+  delay(35);
+#endif
     }
     //handleInput();
     avoidObstacle();
 }
+
+
 
 void handleInput(String input) {
         int inputChoice = input.substring(0).toInt();
