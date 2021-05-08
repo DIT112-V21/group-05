@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button controlCar;
+    Button controlCar, register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +17,18 @@ public class MainActivity extends AppCompatActivity {
 
         controlCar = findViewById(R.id.controlCar);
         controlCar.setOnClickListener(v -> openControlCarPage());
+
+        register = findViewById(R.id.registerPage);
+        register.setOnClickListener(v -> openRegisterPage());
     }
 
     public void openControlCarPage()  {
         Intent intent = new Intent(this, ControlCarActivity.class);
+        startActivity(intent);
+    }
+
+    public void openRegisterPage()  {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }
