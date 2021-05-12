@@ -2,16 +2,19 @@ package com.example.androidappcar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button controlCar, register;
+    Button controlCar, register, delivery;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -20,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         register = findViewById(R.id.registerPage);
         register.setOnClickListener(v -> openRegisterPage());
+
+        delivery = findViewById(R.id.deliveries);
+        delivery.setOnClickListener(v -> openDeliveryPage());
     }
 
     public void openControlCarPage()  {
@@ -29,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openRegisterPage()  {
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+    public void openDeliveryPage(){
+        Intent intent = new Intent(this, DeliveryActivity.class);
         startActivity(intent);
     }
 }
