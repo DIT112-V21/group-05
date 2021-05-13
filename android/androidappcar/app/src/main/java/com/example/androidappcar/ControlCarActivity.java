@@ -28,10 +28,25 @@ public class ControlCarActivity extends AppCompatActivity {
     private static final String MQTT_SERVER = "tcp://" + EXTERNAL_MQTT_BROKER + ":1883";
     private static final String THROTTLE_CONTROL = "/group05/control/handleInput";
     //private static final String STEERING_CONTROL = "/group05/control/steering";
+
+    /*
+    //MQTT Messages
     private static final String FORWARD_THROTTLE = "2 100"; //throttle at 100% motor capacity but will be reduced if speedLimiter < 100
     private static final String REVERSE_THROTTLE = "3 100"; //throttle at 100% motor capacity but will be reduced if speedLimiter < 100
     private static final String TURN_RIGHT = "4 50";
     private static final String TURN_LEFT = "5 50";
+    private static final String STOP_TURN = "6";
+    private static final String STOP_THROTTLE = "7";
+    private static final int QOS = 1;
+    private static final int IMAGE_WIDTH = 320;
+    private static final int IMAGE_HEIGHT = 240;
+     */
+    private Integer forward = 0;
+    private Integer reverse = 0;
+    private Integer right = 0;
+    private Integer left = 0;
+    private int speedLimitForward = 70;
+    private int speedLimitBackwards = 30;
     private static final String STOP_TURN = "6";
     private static final String STOP_THROTTLE = "7";
     private static final int QOS = 1;
@@ -157,6 +172,54 @@ public class ControlCarActivity extends AppCompatActivity {
         }
     }
 
+    public String increment(int pointer) {
+        final int INCREMENT_BY = 10;
+        String result = "";
+        switch(pointer) {
+            case 2:
+                if(reverse != 0){
+                    reverse = reverse - INCREMENT_BY;
+                    result = "3 " + reverse.toString();
+                    break;
+                }
+                if(forward != speedLimitForward) {
+                    forward = forward + INCREMENT_BY;
+                }
+                result = "2 " + forward.toString();
+                break;
+            case 3:
+                if(forward != 0){
+                    forward = forward - INCREMENT_BY;
+                    result = "2 " + forward.toString();
+                    break;
+                }
+                if(reverse != speedLimitBackwards) {
+                    reverse = reverse + INCREMENT_BY;
+                }
+                result = "3 " + reverse.toString();
+                break;
+            case 4:
+                if(left != 0){
+                    left = left - INCREMENT_BY;
+                    result = "5 " + left.toString();
+                    break;
+                }
+                right = right + INCREMENT_BY;
+                result = "4 " + right.toString();
+                break;
+            case 5:
+                if(right != 0){
+                    right = right - INCREMENT_BY;
+                    result = "4 " + right.toString();
+                    break;
+                }
+                left = left + INCREMENT_BY;
+                result = "5 " + left.toString();
+                break;
+        }
+        return result;
+    }
+
     void drive(String throttleSpeed, String actionDescription) {
         if (!isConnected) {
             final String notConnected = "Not connected (yet)";
@@ -168,6 +231,37 @@ public class ControlCarActivity extends AppCompatActivity {
         mMqttClient.publish(THROTTLE_CONTROL, throttleSpeed, QOS, null);
     }
 
+    public void forwardThrottle(View view) {
+        drive(increment(2), "Moving forward");
+    }
+
+    public void reverseThrottle(View view) {
+        drive(increment(3), "Moving backwards");
+    }
+
+    public void turnRight(View view) {
+        drive(increment(4), "Turning right");
+    }
+
+    public void turnLeft(View view) {
+        drive(increment(5), "Turning left");
+    }
+
+    public void stop(View view) {
+        forward = 0;
+        reverse = 0;
+        drive(STOP_THROTTLE, "Stopping");
+    }
+
+    public void stopTurn(View view) {
+        left = 0;
+        right = 0;
+        drive(STOP_TURN, "Straighten Angle");
+    }
+
+}
+
+    /*
     public void forwardThrottle(View view) {
         drive(FORWARD_THROTTLE, "Moving forward");
     }
@@ -192,4 +286,4 @@ public class ControlCarActivity extends AppCompatActivity {
         drive(STOP_TURN, "Stopping");
     }
 
-}
+}*/
