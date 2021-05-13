@@ -20,9 +20,6 @@ const int ECHO_PIN                  = 7;
 const unsigned int MAX_DISTANCE     = 300;
 //Infrared sensor
 const int BACK_IR_PIN               = 3;
-//Car speed values
-const int SPEED_LIMIT               = 70;
-const int REVERSE_SPEED_LIMIT       = 30;
 const int STOP_AT                   = 50;
 //Directional booleans
 bool forward = false;
@@ -116,13 +113,13 @@ void handleInput(String input) {
               case 2: //move forward
                 forward = true;
                 back = false;
-                car.setSpeed(speedLimiter(throttle));
+                car.setSpeed(throttle);
                 break;
               
               case 3: //reverse movement
                 forward = false;
                 back = true;
-                car.setSpeed(-speedLimiter(throttle));
+                car.setSpeed(-throttle);
                 break;
             
               case 4: //turn right
@@ -175,16 +172,4 @@ void avoidObstacle()
          car.setSpeed(0);
          delay(500);
     }
-}
-
-int speedLimiter(int throttle)
-{
-    if (forward && throttle > SPEED_LIMIT) {
-        throttle = SPEED_LIMIT;
-    }
-    else if(back && throttle > REVERSE_SPEED_LIMIT) {
-        throttle = REVERSE_SPEED_LIMIT;
-    }
-    
-    return throttle;
 }
