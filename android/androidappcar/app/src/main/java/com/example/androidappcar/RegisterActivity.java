@@ -88,12 +88,10 @@ public class RegisterActivity extends AppCompatActivity {
                     df.set(userInfo);
 
                     if (isStaffBox.isChecked()) {
-                        // (STAFF) these activities will be changes later based on the users type
-                        startActivity(new Intent(getApplicationContext(), TestActivity.class));
+                        startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
                         finish();
                     } else {
-                        // (PATIENT) these activities will be changes later based on the users type
-                        startActivity(new Intent(getApplicationContext(), TestActivity.class));
+                        startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
                         finish();
                     }
 
@@ -101,7 +99,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        goToLogin.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), LoginActivity.class)));
+        goToLogin.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        });
 
     }
 
