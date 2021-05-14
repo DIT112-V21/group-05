@@ -1,8 +1,13 @@
 package com.example.androidappcar;
 
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -11,9 +16,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -22,6 +31,12 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class ControlCarActivity extends AppCompatActivity {
+
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawer;
+
     private static final String TAG = "Group05 Smartcar";
     private static final String EXTERNAL_MQTT_BROKER = "aerostun.dev";
     private static final String LOCALHOST = "10.0.2.2";
@@ -40,7 +55,8 @@ public class ControlCarActivity extends AppCompatActivity {
     private static final int QOS = 1;
     private static final int IMAGE_WIDTH = 320;
     private static final int IMAGE_HEIGHT = 240;
-     */
+    */
+
     private Integer forward = 0;
     private Integer reverse = 0;
     private Integer right = 0;
@@ -53,7 +69,6 @@ public class ControlCarActivity extends AppCompatActivity {
     private static final int IMAGE_WIDTH = 320;
     private static final int IMAGE_HEIGHT = 240;
 
-
     private MqttClient mMqttClient;
     private boolean isConnected = false;
     private ImageView mCameraView;
@@ -62,9 +77,48 @@ public class ControlCarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_car);
+        setTitle("Control Car");
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        navigationView = findViewById(R.id.navViewStaff);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+
+                case R.id.navHomeMenuS:
+                    Intent intent1 = new Intent(ControlCarActivity.this, StaffMainActivity.class);
+                    startActivity(intent1);
+                    break;
+
+                case R.id.navControlCar:
+                    break;
+
+                case R.id.navCreateDel:
+                    Intent intent2 = new Intent(ControlCarActivity.this, RegisterDeliveryActivity.class);
+                    startActivity(intent2);
+                    break;
+
+                case R.id.navLogOutS:
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent3 = new Intent(ControlCarActivity.this, LoginActivity.class);
+                    startActivity(intent3);
+                    finish();
+                    break;
+            }
+
+            return false;
+        });
+
+        drawer = findViewById(R.id.drawerLayoutStaff);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
-
         connectToMqttBroker();
     }
 
@@ -257,6 +311,15 @@ public class ControlCarActivity extends AppCompatActivity {
         left = 0;
         right = 0;
         drive(STOP_TURN, "Straighten Angle");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }

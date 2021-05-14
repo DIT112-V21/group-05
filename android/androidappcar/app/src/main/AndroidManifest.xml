@@ -13,14 +13,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidAppCar">
-        <activity android:name=".TestActivity"></activity>
-        <activity android:name=".LoginActivity" />
+        android:theme="@style/Theme.SafePill">
+        <activity android:name=".DeliveriesActivity"></activity>
+        <activity android:name=".PatientMainActivity" />
+        <activity android:name=".StaffMainActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ControlCarActivity" />
         <activity android:name=".DeliveryActivity" />
         <activity android:name=".RegisterDeliveryActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

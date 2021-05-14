@@ -22,8 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText email,password;
-    Button loginBtn,gotoRegister;
+    EditText email, password;
+    Button loginBtn, gotoRegister;
     boolean valid = true;
 
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
@@ -53,7 +53,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        gotoRegister.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterActivity.class)));
+        gotoRegister.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            finish();
+        });
     }
 
     private void checkUserAccessLevel(String uid) {
@@ -63,12 +66,14 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("TAG", "onSuccess" + documentSnapshot.getData());
 
             if (documentSnapshot.getString("isStaff") != null) {
-                // (STAFF) these activities will be changes later based on the users type
-                startActivity(new Intent(getApplicationContext(), TestActivity.class));
+                Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
                 finish();
             } else {
-                // (PATIENT) these activities will be changes later based on the users type
-                startActivity(new Intent(getApplicationContext(), TestActivity.class));
+                Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
                 finish();
             }
         });
@@ -96,14 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (documentSnapshot.getString("isStaff") != null) {
                     Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
 
-                    // (STAFF) these activities will be changes later based on the users type
-                    startActivity(new Intent(getApplicationContext(), TestActivity.class));
+                    startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
 
-                    // (PATIENT) these activities will be changes later based on the users type
-                    startActivity(new Intent(getApplicationContext(), TestActivity.class));
+                    startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
                     finish();
                 }
             }).addOnFailureListener(e -> {

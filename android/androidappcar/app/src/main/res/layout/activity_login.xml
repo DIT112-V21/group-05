@@ -61,7 +61,9 @@
                 android:text="LOgin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+                android:background="@drawable/button_background"
+                />
 
             <Button
                 android:id="@+id/gotoRegister"
@@ -73,7 +75,9 @@
                 android:text="Create Account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+                app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+                android:background="@drawable/button_background"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

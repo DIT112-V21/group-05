@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeliveryActivity" >
+    tools:context=".PatientMainActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,23 +22,31 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:elevation="4dp" />
 
-        <RelativeLayout
-            android:id="@+id/delivery_main"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1"
+            android:padding="15dp" >
 
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="-1dp"
-                android:layout_marginTop="0dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ongoingDel"
+                android:text="Ongoing Deliveries"
+                android:background="@drawable/button_background"
+                android:layout_weight="0.3333333"
+                android:layout_marginBottom="35dp"/>
 
-            </ListView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/logOut1"
+                android:text="Log Out"
+                android:background="@drawable/button_background"
+                android:layout_weight="0.11111"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
