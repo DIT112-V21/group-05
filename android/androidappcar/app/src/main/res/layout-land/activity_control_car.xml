@@ -176,6 +176,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:layout_editor_absoluteY="270dp" />
 
+            <ImageButton
+                android:id="@+id/speed_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="680dp"
+                android:layout_marginBottom="300dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/speed_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="270dp" />
+
+            <TextView
+                android:id="@+id/textview_speed"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="610dp"
+                android:layout_marginBottom="305dp"
+                android:text="0"
+                android:textColor="@android:color/black"
+                android:textSize="37sp" />
+
         </RelativeLayout>
 
     </LinearLayout>
