@@ -1,6 +1,5 @@
 package com.example.androidappcar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +15,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -73,7 +71,9 @@ public class ControlCarActivity extends AppCompatActivity {
     private MqttClient mMqttClient;
     private boolean isConnected = false;
     private ImageView mCameraView;
-    private TextView mTextView;
+    private TextView mTextViewSpeed;
+    private TextView mTextViewTurnLeft;
+    private TextView mTextViewTurnRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +121,9 @@ public class ControlCarActivity extends AppCompatActivity {
 
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
-        mTextView = findViewById(R.id.textview_speed);
+        mTextViewSpeed = findViewById(R.id.textview_speed);
+        mTextViewTurnLeft = findViewById(R.id.textview_angleLeft);
+        mTextViewTurnRight  = findViewById(R.id.textview_angleRight);
         connectToMqttBroker();
         doTheAutoRefresh();
     }
@@ -238,49 +240,49 @@ public class ControlCarActivity extends AppCompatActivity {
                 if(reverse != 0){
                     reverse = reverse - INCREMENT_BY;
                     result = "3 " + reverse.toString();
-                    mTextView.setText(reverse.toString());
+                    mTextViewSpeed.setText(reverse.toString());
                     break;
                 }
                 if(forward != speedLimitForward) {
                     forward = forward + INCREMENT_BY;
                 }
                 result = "2 " + forward.toString();
-                mTextView.setText(forward.toString());
+                mTextViewSpeed.setText(forward.toString());
                 break;
             case 3:
                 if(forward != 0){
                     forward = forward - INCREMENT_BY;
                     result = "2 " + forward.toString();
-                    mTextView.setText(forward.toString());
+                    mTextViewSpeed.setText(forward.toString());
                     break;
                 }
                 if(reverse != speedLimitBackwards) {
                     reverse = reverse + INCREMENT_BY;
                 }
                 result = "3 " + reverse.toString();
-                mTextView.setText(reverse.toString());
+                mTextViewSpeed.setText(reverse.toString());
                 break;
             case 4:
                 if(left != 0){
                     left = left - INCREMENT_BY;
                     result = "5 " + left.toString();
-                    mTextView.setText(left.toString());
+                    mTextViewTurnLeft.setText(left.toString());
                     break;
                 }
                 right = right + INCREMENT_BY;
                 result = "4 " + right.toString();
-                mTextView.setText(right.toString());
+                mTextViewTurnRight.setText(right.toString());
                 break;
             case 5:
                 if(right != 0){
                     right = right - INCREMENT_BY;
                     result = "4 " + right.toString();
-                    mTextView.setText(right.toString());
+                    mTextViewTurnRight.setText(right.toString());
                     break;
                 }
                 left = left + INCREMENT_BY;
                 result = "5 " + left.toString();
-                mTextView.setText(left.toString());
+                mTextViewTurnLeft.setText(left.toString());
                 break;
         }
         return result;
@@ -317,12 +319,15 @@ public class ControlCarActivity extends AppCompatActivity {
         forward = 0;
         reverse = 0;
         drive(STOP_THROTTLE, "Stopping");
+        mTextViewSpeed.setText("0");
     }
 
     public void stopTurn(View view) {
         left = 0;
         right = 0;
         drive(STOP_TURN, "Straighten Angle");
+        mTextViewTurnLeft.setText("0");
+        mTextViewTurnRight.setText("0");
     }
 
     @Override
