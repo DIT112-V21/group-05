@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -72,6 +73,7 @@ public class ControlCarActivity extends AppCompatActivity {
     private MqttClient mMqttClient;
     private boolean isConnected = false;
     private ImageView mCameraView;
+    private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +121,9 @@ public class ControlCarActivity extends AppCompatActivity {
 
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
+        mTextView = findViewById(R.id.textview_speed);
         connectToMqttBroker();
+        doTheAutoRefresh();
     }
 
     @Override
@@ -234,41 +238,49 @@ public class ControlCarActivity extends AppCompatActivity {
                 if(reverse != 0){
                     reverse = reverse - INCREMENT_BY;
                     result = "3 " + reverse.toString();
+                    mTextView.setText(reverse.toString());
                     break;
                 }
                 if(forward != speedLimitForward) {
                     forward = forward + INCREMENT_BY;
                 }
                 result = "2 " + forward.toString();
+                mTextView.setText(forward.toString());
                 break;
             case 3:
                 if(forward != 0){
                     forward = forward - INCREMENT_BY;
                     result = "2 " + forward.toString();
+                    mTextView.setText(forward.toString());
                     break;
                 }
                 if(reverse != speedLimitBackwards) {
                     reverse = reverse + INCREMENT_BY;
                 }
                 result = "3 " + reverse.toString();
+                mTextView.setText(reverse.toString());
                 break;
             case 4:
                 if(left != 0){
                     left = left - INCREMENT_BY;
                     result = "5 " + left.toString();
+                    mTextView.setText(left.toString());
                     break;
                 }
                 right = right + INCREMENT_BY;
                 result = "4 " + right.toString();
+                mTextView.setText(right.toString());
                 break;
             case 5:
                 if(right != 0){
                     right = right - INCREMENT_BY;
                     result = "4 " + right.toString();
+                    mTextView.setText(right.toString());
                     break;
                 }
                 left = left + INCREMENT_BY;
                 result = "5 " + left.toString();
+                mTextView.setText(left.toString());
                 break;
         }
         return result;
@@ -320,6 +332,15 @@ public class ControlCarActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void doTheAutoRefresh() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            }
+        }, 1000);
     }
 
 }
