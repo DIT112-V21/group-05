@@ -36,12 +36,29 @@
                 android:contentDescription="cameraView" />
 
             <ImageButton
+                android:id="@+id/breakButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="662dp"
+                android:layout_marginBottom="128dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:onClick="stop"
+                android:scaleType="fitXY"
+                android:src="@drawable/break_button"
+                app:layout_constraintEnd_toStartOf="@+id/rightButton"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="270dp" />
+
+            <ImageButton
                 android:id="@+id/forwardButton"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="650dp"
+                android:layout_marginEnd="653dp"
                 android:layout_marginBottom="205dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:onClick="forwardThrottle"
@@ -58,7 +75,7 @@
                 android:layout_height="75dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="650dp"
+                android:layout_marginEnd="653dp"
                 android:layout_marginBottom="35dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:onClick="reverseThrottle"
@@ -66,23 +83,6 @@
                 android:src="@drawable/back_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:layout_editor_absoluteX="67dp" />
-
-            <ImageButton
-                android:id="@+id/breakButton"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="658dp"
-                android:layout_marginBottom="128dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:onClick="stop"
-                android:scaleType="fitXY"
-                android:src="@drawable/break_button"
-                app:layout_constraintEnd_toStartOf="@+id/rightButton"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="270dp" />
 
             <ImageButton
                 android:id="@+id/leftButton"
@@ -176,29 +176,84 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:layout_editor_absoluteY="270dp" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/speed_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="680dp"
-                android:layout_marginBottom="300dp"
+                android:layout_marginEnd="576dp"
+                android:layout_marginBottom="33dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:scaleType="fitXY"
-                android:src="@drawable/speed_button"
+                android:src="@drawable/speedometer"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:layout_editor_absoluteY="270dp" />
 
             <TextView
                 android:id="@+id/textview_speed"
-                android:layout_width="60dp"
+                android:layout_width="35dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginEnd="610dp"
-                android:layout_marginBottom="305dp"
+                android:layout_marginEnd="534dp"
+                android:layout_marginBottom="38dp"
                 android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="37sp" />
+
+            <ImageView
+                android:id="@+id/turnAngleRight"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="224dp"
+                android:layout_marginBottom="70dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/turnangleright"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="270dp" />
+
+            <ImageView
+                android:id="@+id/turnAngleLeft"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="267dp"
+                android:layout_marginBottom="70dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:scaleType="fitXY"
+                android:src="@drawable/angleturnleft"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="270dp" />
+
+            <TextView
+                android:id="@+id/textview_angleLeft"
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="267dp"
+                android:layout_marginBottom="37dp"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="37sp" />
+
+            <TextView
+                android:id="@+id/textview_angleRight"
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="224dp"
+                android:layout_marginBottom="37dp"
+                android:text="0"
+                android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="37sp" />
 
