@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 
@@ -25,6 +28,8 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
+
+
         //Gets Delivery info from the List
         String patient = getItem(position).getPatient();
         String parcel = getItem(position).getParcel();

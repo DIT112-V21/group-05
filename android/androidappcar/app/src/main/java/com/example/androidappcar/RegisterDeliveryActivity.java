@@ -1,11 +1,22 @@
 package com.example.androidappcar;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.format.DateFormat;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,14 +28,21 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
+import java.util.Calendar;
+
 public class RegisterDeliveryActivity extends DeliveryActivity {
 
-    EditText patient, parcel, location, date, time;
+    private static final String TAG = "RegisterDeliveryActivity";
+
+    EditText patient, parcel, location;
+    TextView date, time;
     Button createDelivery;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +58,61 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
         createDelivery = findViewById(R.id.createDeliveryBtn);
 
         createDelivery.setOnClickListener(v -> createDelivery());
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        RegisterDeliveryActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                month = month +1;
+                String dateS = day + "/" + month + "/" + year;
+                date.setText(dateS);
+            }
+        };
+
+        time.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int hrs = cal.HOUR_OF_DAY;
+                int min = cal.MINUTE;
+                TimePickerDialog dialog = new TimePickerDialog(
+                        RegisterDeliveryActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mTimeSetListener,
+                        min, hrs, true);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String minuteS;
+                minuteS = String.valueOf(minute);
+                if(minuteS.length() ==  1){
+                    minuteS = "0"+minuteS;
+                }
+                String timeS = hourOfDay + ":" + minuteS;
+                time.setText(timeS);
+            }
+        };
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,6 +153,7 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
         toggle.syncState();
     }
 
+
     private void createDelivery() {
         String patientS = patient.getText().toString();
         String parcelS = parcel.getText().toString();
@@ -91,6 +165,12 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
             Delivery del = new Delivery(patientS, parcelS, locationS, dateS, timeS);
             deliveryList.add(del);
             saveData();
+           Toast.makeText(RegisterDeliveryActivity.this, "You have created a delivery for " + patientS, Toast.LENGTH_SHORT).show();
+           patient.setText("");
+           parcel.setText("");
+           location.setText("");
+           date.setText("");
+           time.setText("");
        }
     }
 
