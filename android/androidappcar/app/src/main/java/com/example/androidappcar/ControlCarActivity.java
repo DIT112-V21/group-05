@@ -64,6 +64,8 @@ public class ControlCarActivity extends AppCompatActivity {
     private static int speedLimitBackwards = 30;
     private static final String STOP_TURN = "6";
     private static final String STOP_THROTTLE = "7";
+    private static final String POWER_ON = "1";
+    private static final String POWER_OFF = "0";
     private static final int QOS = 1;
     private static final int IMAGE_WIDTH = 320;
     private static final int IMAGE_HEIGHT = 240;
@@ -346,6 +348,21 @@ public class ControlCarActivity extends AppCompatActivity {
             public void run() {
             }
         }, 1000);
+    }
+
+    public void powerOn(View view) {
+        drive(POWER_ON, "Turn on");
+    }
+
+    public void powerOff(View view) {
+        drive(POWER_OFF, "Turn off");
+        forward = 0;
+        reverse = 0;
+        mTextViewSpeed.setText("0");
+        left = 0;
+        right = 0;
+        mTextViewTurnLeft.setText("0");
+        mTextViewTurnRight.setText("0");
     }
 
     public static Integer getSpeedLimitForward() {
