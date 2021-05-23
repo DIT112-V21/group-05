@@ -60,8 +60,8 @@ public class ControlCarActivity extends AppCompatActivity {
     private Integer reverse = 0;
     private Integer right = 0;
     private Integer left = 0;
-    private int speedLimitForward = 70;
-    private int speedLimitBackwards = 30;
+    private static int speedLimitForward = 70;
+    private static int speedLimitBackwards = 30;
     private static final String STOP_TURN = "6";
     private static final String STOP_THROTTLE = "7";
     private static final int QOS = 1;
@@ -346,6 +346,22 @@ public class ControlCarActivity extends AppCompatActivity {
             public void run() {
             }
         }, 1000);
+    }
+
+    public static Integer getSpeedLimitForward() {
+        return speedLimitForward;
+    }
+
+    public static Integer getSpeedLimitBackwards() {
+        return speedLimitBackwards;
+    }
+
+    public static void setSpeedLimitForward(Integer speedLimitForward2) {
+        speedLimitForward = speedLimitForward2;
+    }
+
+    public static void setSpeedLimitBackwards(Integer speedLimitBackwards2) {
+        speedLimitBackwards = speedLimitBackwards2;
     }
 
 }

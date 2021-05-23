@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="SpeedLimitTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
+    <style name="SpeedLimitTheme.CustomTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
+</resources>

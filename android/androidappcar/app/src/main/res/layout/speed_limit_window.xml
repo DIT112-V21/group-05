@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEAEA">
+
+    <SeekBar
+        android:id="@+id/forwardBar"
+        android:layout_width="216dp"
+        android:layout_height="49dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="156dp"
+        android:clickable="true"
+        android:indeterminate="false"
+        android:max="10"
+        android:progress="7"
+        android:progressTint="@color/lightblue" />
+
+    <SeekBar
+        android:id="@+id/reverseBar"
+        android:layout_width="217dp"
+        android:layout_height="46dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="338dp"
+        android:max="10"
+        android:progress="3"
+        android:progressTint="@color/lightblue" />
+
+    <TextView
+        android:id="@+id/speedLimitTitle"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="43dp"
+        android:autoText="false"
+        android:text="Change Speed Limit"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/forwardLabel"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="166dp"
+        android:text="Forward"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/reverseLabel"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="348dp"
+        android:text="Reverse"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/speedForwardInteger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="169dp"
+        android:layout_marginEnd="28dp" />
+
+    <TextView
+        android:id="@+id/speedReverseInteger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="28dp" />
+
+    <Button
+        android:id="@+id/saveButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginBottom="147dp"
+        android:background="@drawable/button_background"
+        android:text="SAVE"
+        android:textColor="#FFFFFF"
+        app:iconTint="#673AB7" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="147dp"
+        android:background="@drawable/button_background"
+        android:text="EXIT"
+        android:textColor="#FFFFFF"
+        app:iconTint="#673AB7" />
+
+</RelativeLayout>

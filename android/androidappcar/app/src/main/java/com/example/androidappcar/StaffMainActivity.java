@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class StaffMainActivity extends AppCompatActivity {
 
-    Button controlCarBtn, createDelBtn, logOutBtn;
+    Button controlCarBtn, createDelBtn, logOutBtn, speedLimitBtn;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -72,6 +73,14 @@ public class StaffMainActivity extends AppCompatActivity {
 
         createDelBtn = findViewById(R.id.createDelivery);
         createDelBtn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), RegisterDeliveryActivity.class)));
+
+        speedLimitBtn = findViewById(R.id.speedLimit);
+        speedLimitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StaffMainActivity.this,SpeedLimit.class));
+            }
+        });
 
         logOutBtn = findViewById(R.id.logOut);
         logOutBtn.setOnClickListener(v -> {
