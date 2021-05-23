@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button controlCar, register, delivery;
+    Button controlCar, register, delivery, speedLimit;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         delivery = findViewById(R.id.deliveries);
         delivery.setOnClickListener(v -> openDeliveryPage());
+
     }
 
     public void openControlCarPage()  {
