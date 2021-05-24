@@ -41,20 +41,6 @@ public class ControlCarActivity extends AppCompatActivity {
     private static final String LOCALHOST = "10.0.2.2";
     private static final String MQTT_SERVER = "tcp://" + EXTERNAL_MQTT_BROKER + ":1883";
     private static final String THROTTLE_CONTROL = "/group05/control/handleInput";
-    //private static final String STEERING_CONTROL = "/group05/control/steering";
-
-    /*
-    //MQTT Messages
-    private static final String FORWARD_THROTTLE = "2 100"; //throttle at 100% motor capacity but will be reduced if speedLimiter < 100
-    private static final String REVERSE_THROTTLE = "3 100"; //throttle at 100% motor capacity but will be reduced if speedLimiter < 100
-    private static final String TURN_RIGHT = "4 50";
-    private static final String TURN_LEFT = "5 50";
-    private static final String STOP_TURN = "6";
-    private static final String STOP_THROTTLE = "7";
-    private static final int QOS = 1;
-    private static final int IMAGE_WIDTH = 320;
-    private static final int IMAGE_HEIGHT = 240;
-    */
 
     private Integer forward = 0;
     private Integer reverse = 0;
@@ -69,6 +55,7 @@ public class ControlCarActivity extends AppCompatActivity {
     private static final int QOS = 1;
     private static final int IMAGE_WIDTH = 320;
     private static final int IMAGE_HEIGHT = 240;
+    private boolean powerOn = true;
 
     private MqttClient mMqttClient;
     private boolean isConnected = false;
@@ -164,7 +151,6 @@ public class ControlCarActivity extends AppCompatActivity {
                     Log.i(TAG, successfulConnection);
                     Toast.makeText(getApplicationContext(), successfulConnection, Toast.LENGTH_SHORT).show();
 
-                    //mMqttClient.subscribe("/smartcar/ultrasound/front", QOS, null);
                     mMqttClient.subscribe("/group/05/camera", QOS, null);
                 }
 
@@ -236,57 +222,60 @@ public class ControlCarActivity extends AppCompatActivity {
 
     public String increment(int pointer) {
         final int INCREMENT_BY = 10;
-        String result = "";
-        switch(pointer) {
-            case 2:
-                if(reverse != 0){
-                    reverse = reverse - INCREMENT_BY;
-                    result = "3 " + reverse.toString();
-                    mTextViewSpeed.setText(reverse.toString());
-                    break;
-                }
-                if(forward != speedLimitForward) {
-                    forward = forward + INCREMENT_BY;
-                }
-                result = "2 " + forward.toString();
-                mTextViewSpeed.setText(forward.toString());
-                break;
-            case 3:
-                if(forward != 0){
-                    forward = forward - INCREMENT_BY;
+        String result = " ";
+        if(powerOn) {
+            switch(pointer) {
+                case 2:
+                    if(reverse != 0){
+                        reverse = reverse - INCREMENT_BY;
+                        result = "3 " + reverse.toString();
+                        mTextViewSpeed.setText(reverse.toString());
+                        break;
+                    }
+                    if(forward != speedLimitForward) {
+                        forward = forward + INCREMENT_BY;
+                    }
                     result = "2 " + forward.toString();
                     mTextViewSpeed.setText(forward.toString());
                     break;
-                }
-                if(reverse != speedLimitBackwards) {
-                    reverse = reverse + INCREMENT_BY;
-                }
-                result = "3 " + reverse.toString();
-                mTextViewSpeed.setText(reverse.toString());
-                break;
-            case 4:
-                if(left != 0){
-                    left = left - INCREMENT_BY;
-                    result = "5 " + left.toString();
-                    mTextViewTurnLeft.setText(left.toString());
+                case 3:
+                    if(forward != 0){
+                        forward = forward - INCREMENT_BY;
+                        result = "2 " + forward.toString();
+                        mTextViewSpeed.setText(forward.toString());
+                        break;
+                    }
+                    if(reverse != speedLimitBackwards) {
+                        reverse = reverse + INCREMENT_BY;
+                    }
+                    result = "3 " + reverse.toString();
+                    mTextViewSpeed.setText(reverse.toString());
                     break;
-                }
-                right = right + INCREMENT_BY;
-                result = "4 " + right.toString();
-                mTextViewTurnRight.setText(right.toString());
-                break;
-            case 5:
-                if(right != 0){
-                    right = right - INCREMENT_BY;
+                case 4:
+                    if(left != 0){
+                        left = left - INCREMENT_BY;
+                        result = "5 " + left.toString();
+                        mTextViewTurnLeft.setText(left.toString());
+                        break;
+                    }
+                    right = right + INCREMENT_BY;
                     result = "4 " + right.toString();
                     mTextViewTurnRight.setText(right.toString());
                     break;
-                }
-                left = left + INCREMENT_BY;
-                result = "5 " + left.toString();
-                mTextViewTurnLeft.setText(left.toString());
-                break;
+                case 5:
+                    if(right != 0){
+                        right = right - INCREMENT_BY;
+                        result = "4 " + right.toString();
+                        mTextViewTurnRight.setText(right.toString());
+                        break;
+                    }
+                    left = left + INCREMENT_BY;
+                    result = "5 " + left.toString();
+                    mTextViewTurnLeft.setText(left.toString());
+                    break;
+            }
         }
+
         return result;
     }
 
@@ -351,10 +340,12 @@ public class ControlCarActivity extends AppCompatActivity {
     }
 
     public void powerOn(View view) {
+        powerOn = true;
         drive(POWER_ON, "Turn on");
     }
 
     public void powerOff(View view) {
+        powerOn = false;
         drive(POWER_OFF, "Turn off");
         forward = 0;
         reverse = 0;
@@ -382,30 +373,3 @@ public class ControlCarActivity extends AppCompatActivity {
     }
 
 }
-
-    /*
-    public void forwardThrottle(View view) {
-        drive(FORWARD_THROTTLE, "Moving forward");
-    }
-
-    public void reverseThrottle(View view) {
-        drive(REVERSE_THROTTLE, "Moving backward");
-    }
-
-    public void turnRight(View view) {
-        drive(TURN_RIGHT, "Moving forward left");
-    }
-
-    public void turnLeft(View view) {
-        drive(TURN_LEFT, "Moving forward left");
-    }
-
-    public void stop(View view) {
-        drive(STOP_THROTTLE, "Stopping");
-    }
-
-    public void stopTurn(View view) {
-        drive(STOP_TURN, "Stopping");
-    }
-
-}*/
