@@ -91,7 +91,6 @@ void loop() {
   delay(35);
 #endif
     }
-    //handleInput();
     avoidObstacle();
 }
 
