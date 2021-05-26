@@ -121,11 +121,6 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
 
-                case R.id.navHomeMenuS:
-                    Intent intent1 = new Intent(RegisterDeliveryActivity.this, StaffMainActivity.class);
-                    startActivity(intent1);
-                    break;
-
                 case R.id.navControlCar:
                     Intent intent2 = new Intent(RegisterDeliveryActivity.this, ControlCarActivity.class);
                     startActivity(intent2);

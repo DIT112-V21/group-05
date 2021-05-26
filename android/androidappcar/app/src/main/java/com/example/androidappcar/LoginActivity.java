@@ -68,12 +68,12 @@ public class LoginActivity extends AppCompatActivity {
             if (documentSnapshot.getString("isStaff") != null) {
                 Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
+                startActivity(new Intent(getApplicationContext(), RegisterDeliveryActivity.class));
                 finish();
             } else {
                 Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
+                startActivity(new Intent(getApplicationContext(), DeliveryActivity.class));
                 finish();
             }
         });
@@ -101,12 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                 if (documentSnapshot.getString("isStaff") != null) {
                     Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), RegisterDeliveryActivity.class));
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), DeliveryActivity.class));
                     finish();
                 }
             }).addOnFailureListener(e -> {

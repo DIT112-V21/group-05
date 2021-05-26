@@ -89,10 +89,10 @@ public class RegisterActivity extends AppCompatActivity {
                     df.set(userInfo);
 
                     if (isStaffBox.isChecked()) {
-                        startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), RegisterDeliveryActivity.class));
                         finish();
                     } else {
-                        startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), DeliveryActivity.class));
                         finish();
                     }
 
