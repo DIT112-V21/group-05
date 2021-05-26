@@ -221,7 +221,7 @@
                 tools:layout_editor_absoluteY="270dp" />
 
             <ImageView
-                android:id="@+id/speedMeter"
+                android:id="@+id/speed_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
@@ -272,6 +272,16 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="37sp" />
+
+            <ImageView
+                android:id="@+id/carStatus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:srcCompat="@drawable/car_on" />
 
         </RelativeLayout>
 

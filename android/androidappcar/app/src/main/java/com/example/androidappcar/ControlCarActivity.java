@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,7 @@ public class ControlCarActivity extends AppCompatActivity {
     private Integer left = 0;
     private static int speedLimitForward = 70;
     private static int speedLimitBackwards = 30;
+    private static final int TURN_LIMIT = 100;
     private static final String STOP_TURN = "6";
     private static final String STOP_THROTTLE = "7";
     private static final String POWER_ON = "1";
@@ -63,6 +65,8 @@ public class ControlCarActivity extends AppCompatActivity {
     private TextView mTextViewSpeed;
     private TextView mTextViewTurnLeft;
     private TextView mTextViewTurnRight;
+    private ImageView speedButton;
+    private ImageView carStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,14 @@ public class ControlCarActivity extends AppCompatActivity {
         mTextViewSpeed = findViewById(R.id.textview_speed);
         mTextViewTurnLeft = findViewById(R.id.textview_angleLeft);
         mTextViewTurnRight  = findViewById(R.id.textview_angleRight);
+        speedButton = findViewById(R.id.speed_button);
+        speedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ControlCarActivity.this, SpeedLimit.class));
+            }
+        });
+        carStatus = findViewById(R.id.carStatus);
         connectToMqttBroker();
         doTheAutoRefresh();
     }
@@ -220,7 +232,7 @@ public class ControlCarActivity extends AppCompatActivity {
         String result = " ";
         if(powerOn) {
             switch(pointer) {
-                case 2:
+                case 2: // go forward
                     if(reverse != 0){
                         reverse = reverse - INCREMENT_BY;
                         result = "3 " + reverse.toString();
@@ -233,7 +245,7 @@ public class ControlCarActivity extends AppCompatActivity {
                     result = "2 " + forward.toString();
                     mTextViewSpeed.setText(forward.toString());
                     break;
-                case 3:
+                case 3: // go backwards
                     if(forward != 0){
                         forward = forward - INCREMENT_BY;
                         result = "2 " + forward.toString();
@@ -246,25 +258,29 @@ public class ControlCarActivity extends AppCompatActivity {
                     result = "3 " + reverse.toString();
                     mTextViewSpeed.setText(reverse.toString());
                     break;
-                case 4:
+                case 4: // go right
                     if(left != 0){
                         left = left - INCREMENT_BY;
                         result = "5 " + left.toString();
                         mTextViewTurnLeft.setText(left.toString());
                         break;
                     }
-                    right = right + INCREMENT_BY;
+                    if (right != TURN_LIMIT) {
+                        right = right + INCREMENT_BY;
+                    }
                     result = "4 " + right.toString();
                     mTextViewTurnRight.setText(right.toString());
                     break;
-                case 5:
+                case 5: // go left
                     if(right != 0){
                         right = right - INCREMENT_BY;
                         result = "4 " + right.toString();
                         mTextViewTurnRight.setText(right.toString());
                         break;
                     }
-                    left = left + INCREMENT_BY;
+                    if (left != TURN_LIMIT) {
+                        left = left + INCREMENT_BY;
+                    }
                     result = "5 " + left.toString();
                     mTextViewTurnLeft.setText(left.toString());
                     break;
@@ -337,11 +353,13 @@ public class ControlCarActivity extends AppCompatActivity {
     public void powerOn(View view) {
         powerOn = true;
         drive(POWER_ON, "Turn on");
+        carStatus.setImageResource(R.drawable.car_on);
     }
 
     public void powerOff(View view) {
         powerOn = false;
         drive(POWER_OFF, "Turn off");
+        carStatus.setImageResource(R.drawable.car_off);
         forward = 0;
         reverse = 0;
         mTextViewSpeed.setText("0");
