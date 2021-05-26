@@ -77,11 +77,6 @@ public class ControlCarActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
 
-                case R.id.navHomeMenuS:
-                    Intent intent1 = new Intent(ControlCarActivity.this, StaffMainActivity.class);
-                    startActivity(intent1);
-                    break;
-
                 case R.id.navControlCar:
                     break;
 

@@ -52,11 +52,6 @@ public class DeliveryActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
 
-                case R.id.navHomeMenuP:
-                    Intent intent1 = new Intent(DeliveryActivity.this, PatientMainActivity.class);
-                    startActivity(intent1);
-                    break;
-
                 case R.id.navDeliveries:
                     break;
 

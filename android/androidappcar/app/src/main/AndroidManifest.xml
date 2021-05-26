@@ -14,11 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SafePill">
-        <activity android:name=".DeliveriesActivity"></activity>
-        <activity android:name=".PatientMainActivity" />
-        <activity android:name=".StaffMainActivity" />
-        <activity android:name=".TestActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ControlCarActivity" />
         <activity android:name=".DeliveryActivity" />
