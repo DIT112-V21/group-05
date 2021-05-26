@@ -169,14 +169,6 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
        }
     }
 
-    private void saveData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(deliveryList);
-        editor.putString("delivery list", json);
-        editor.apply();
-    }
 
     private void clear(){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);

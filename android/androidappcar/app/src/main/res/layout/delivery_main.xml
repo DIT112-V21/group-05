@@ -30,13 +30,24 @@
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="-1dp"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="50dp">
 
             </ListView>
+
+            <Button
+                android:id="@+id/confirmBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/listView"
+                android:layout_marginTop="-50dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#C3C2C0"
+                android:text="confirm" />
 
         </RelativeLayout>
 
