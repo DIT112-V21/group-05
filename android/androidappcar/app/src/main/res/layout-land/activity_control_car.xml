@@ -138,7 +138,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="25dp"
-                android:layout_marginBottom="255dp"
+                android:layout_marginBottom="230dp"
                 android:background="?selectableItemBackgroundBorderless"
                 android:onClick="changeScreenOrientation"
                 android:scaleType="fitXY"
@@ -153,9 +153,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="75dp"
-                android:layout_marginBottom="255dp"
+                android:layout_marginBottom="230dp"
                 android:background="?selectableItemBackgroundBorderless"
-                android:onClick="forwardThrottle"
+                android:onClick="powerOn"
                 android:scaleType="fitXY"
                 android:src="@drawable/on_button"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -168,9 +168,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginEnd="120dp"
-                android:layout_marginBottom="255dp"
+                android:layout_marginBottom="230dp"
                 android:background="?selectableItemBackgroundBorderless"
-                android:onClick="stop"
+                android:onClick="powerOff"
                 android:scaleType="fitXY"
                 android:src="@drawable/off_button"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -256,6 +256,16 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="37sp" />
+
+            <ImageView
+                android:id="@+id/carStatus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                app:srcCompat="@drawable/car_on" />
 
         </RelativeLayout>
 
