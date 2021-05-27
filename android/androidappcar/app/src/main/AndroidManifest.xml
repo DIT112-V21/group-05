@@ -21,6 +21,9 @@
         <activity
             android:name=".SpeedLimit"
             android:theme="@style/SpeedLimitTheme.CustomTheme" />
+        <activity
+            android:name=".Connectivity"
+            android:theme="@style/SpeedLimitTheme.CustomTheme" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

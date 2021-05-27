@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -38,10 +39,11 @@ public class ControlCarActivity extends AppCompatActivity {
     private DrawerLayout drawer;
 
     private static final String TAG = "Group05 Smartcar";
-    private static final String EXTERNAL_MQTT_BROKER = "aerostun.dev";
+    private static String EXTERNAL_MQTT_BROKER = "aerostun.dev";
     private static final String LOCALHOST = "10.0.2.2";
-    private static final String MQTT_SERVER = "tcp://" + EXTERNAL_MQTT_BROKER + ":1883";
+    private static String MQTT_SERVER = "tcp://" + EXTERNAL_MQTT_BROKER + ":1883";
     private static final String THROTTLE_CONTROL = "/group05/control/handleInput";
+    private static String MAIN_TOPIC = "/group/05";
 
     private Integer forward = 0;
     private Integer reverse = 0;
@@ -65,7 +67,7 @@ public class ControlCarActivity extends AppCompatActivity {
     private TextView mTextViewSpeed;
     private TextView mTextViewTurnLeft;
     private TextView mTextViewTurnRight;
-    private ImageView speedButton;
+    private ImageView speedButton, connectionButton;
     private ImageView carStatus;
 
     @Override
@@ -119,6 +121,13 @@ public class ControlCarActivity extends AppCompatActivity {
                 startActivity(new Intent(ControlCarActivity.this, SpeedLimit.class));
             }
         });
+        connectionButton = findViewById(R.id.connectionButton);
+        connectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ControlCarActivity.this, Connectivity.class));
+            }
+        });
         carStatus = findViewById(R.id.carStatus);
         connectToMqttBroker();
         doTheAutoRefresh();
@@ -158,7 +167,7 @@ public class ControlCarActivity extends AppCompatActivity {
                     Log.i(TAG, successfulConnection);
                     Toast.makeText(getApplicationContext(), successfulConnection, Toast.LENGTH_SHORT).show();
 
-                    mMqttClient.subscribe("/group/05/camera", QOS, null);
+                    mMqttClient.subscribe(MAIN_TOPIC + "/camera", QOS, null);
                 }
 
                 @Override
@@ -180,7 +189,7 @@ public class ControlCarActivity extends AppCompatActivity {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-                    if (topic.equals("/group/05/camera")) {
+                    if (topic.equals(MAIN_TOPIC + "/camera")) {
                         final Bitmap bm = Bitmap.createBitmap(IMAGE_WIDTH, IMAGE_HEIGHT, Bitmap.Config.ARGB_8888);
 
                         final byte[] payload = message.getPayload();
@@ -298,7 +307,7 @@ public class ControlCarActivity extends AppCompatActivity {
             return;
         }
         Log.i(TAG, actionDescription);
-        mMqttClient.publish(THROTTLE_CONTROL, throttleSpeed, QOS, null);
+        mMqttClient.publish(MAIN_TOPIC + "/control/handleInput", throttleSpeed, QOS, null);
     }
 
     public void forwardThrottle(View view) {
@@ -383,6 +392,14 @@ public class ControlCarActivity extends AppCompatActivity {
 
     public static void setSpeedLimitBackwards(Integer speedLimitBackwards2) {
         speedLimitBackwards = speedLimitBackwards2;
+    }
+
+    public static void setExternalMqttBroker(String externalMqttBroker) {
+        EXTERNAL_MQTT_BROKER = externalMqttBroker;
+    }
+
+    public static void setMainTopic(String mainTopic) {
+        MAIN_TOPIC = mainTopic;
     }
 
 }
