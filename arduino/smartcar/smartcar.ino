@@ -60,9 +60,9 @@ void setup() {
     //mqtt.begin("aerostun.dev", 1883, WiFi);
 #endif
     if (mqtt.connect("arduino", "public", "public")) {
-    mqtt.subscribe("/group05/control/#", 1);
+    mqtt.subscribe("/group/05/control/#", 1);
     mqtt.onMessage([](String topic, String message) {
-      if (topic == "/group05/control/handleInput") {
+      if (topic == "/group/05/control/handleInput") {
         handleInput(message);
       }
       else {
