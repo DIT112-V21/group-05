@@ -1,5 +1,6 @@
 package com.example.androidappcar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -29,6 +32,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
     ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
     ArrayList<Delivery> userDeliveryList = new ArrayList<Delivery>();
+    ArrayList<Delivery> confirmed = new ArrayList<Delivery>();
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
@@ -38,6 +42,8 @@ public class DeliveryActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
+    private ListView mListView;
+    private Button confirmBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,8 @@ public class DeliveryActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mListView = findViewById(R.id.listView);
+        confirmBtn = findViewById(R.id.confirmBtn);
 
         navigationView = findViewById(R.id.navViewPatient);
         navigationView.setNavigationItemSelectedListener(item -> {
@@ -77,6 +85,14 @@ public class DeliveryActivity extends AppCompatActivity {
         checkUserName(uid);
     }
 
+    void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(deliveryList);
+        editor.putString("delivery list", json);
+        editor.apply();
+    }
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -97,7 +113,7 @@ public class DeliveryActivity extends AppCompatActivity {
     }
     private void checkUserName(String uid) {
         DocumentReference df = fStore.collection("Users").document(uid);
-        ListView mListView = findViewById(R.id.listView);
+
         df.get().addOnSuccessListener(documentSnapshot -> {
             Log.d("TAG", "onSuccess" + documentSnapshot.getData());
 
@@ -108,6 +124,10 @@ public class DeliveryActivity extends AppCompatActivity {
                 mListView.setAdapter(adapter);
                 //startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
                 //finish();
+
+                confirm();
+
+
             } else {
                 //Toast.makeText(DeliveryActivity.this, "Something Went Wrong " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
                 DeliveryListAdapter adapter = new DeliveryListAdapter(this, R.layout.delivery_card, deliveryList);
@@ -122,6 +142,60 @@ public class DeliveryActivity extends AppCompatActivity {
            if (delivery.getPatient().equals(patientName)) {
                 userDeliveryList.add(delivery);
             } 
+        }
+    }
+
+
+    public void confirm() {
+        confirmBtn.setOnClickListener(v -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(confirmBtn.getContext());
+            builder.setMessage("Confirm delivery?")
+                    //.setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "Confirmed", Toast.LENGTH_LONG).show();
+                            delivered();
+
+                            mListView.setAdapter(null);
+                            mListView.setEmptyView(v);  //to remove confirmbtn
+
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+    }
+
+    public void delivered() {
+        for ( Delivery parcel : copyDeliveryList(deliveryList)) {
+            confirmed.add(parcel);
+            deliveryList.remove(parcel);
+            saveData();
+        }
+    }
+
+    public ArrayList<Delivery> copyDeliveryList(ArrayList<Delivery> objects){
+        ArrayList<Delivery> userDeliveryListTem = new ArrayList<Delivery>();
+        for(Delivery item : objects){
+            userDeliveryListTem.add(item);
+        }
+        return userDeliveryListTem;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
     }
 }
