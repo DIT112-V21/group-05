@@ -157,7 +157,7 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
        if (patientS != null && parcelS != null && locationS != null && dateS != null && timeS != null) {
             Delivery del = new Delivery(patientS, parcelS, locationS, dateS, timeS);
             deliveryList.add(del);
-            saveData();
+           saveData(deliveryList, "delivery list");
            Toast.makeText(RegisterDeliveryActivity.this, "You have created a delivery for " + patientS, Toast.LENGTH_SHORT).show();
            patient.setText("");
            parcel.setText("");
@@ -167,13 +167,6 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
        }
     }
 
-
-    private void clear(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-    }
 
     @Override
     public void onBackPressed() {

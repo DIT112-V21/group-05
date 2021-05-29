@@ -85,12 +85,12 @@ public class DeliveryActivity extends AppCompatActivity {
         checkUserName(uid);
     }
 
-    void saveData(){
+    void saveData(ArrayList<Delivery> saveList, String listTitle){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(deliveryList);
-        editor.putString("delivery list", json);
+        String json = gson.toJson(saveList);
+        editor.putString(listTitle, json);
         editor.apply();
     }
 
@@ -103,6 +103,13 @@ public class DeliveryActivity extends AppCompatActivity {
         deliveryList = gson.fromJson(json, type);
         if (deliveryList == null) {
             deliveryList = new ArrayList<>();
+        }
+        json = sharedPreferences.getString("confirmed list", null);
+        type = new TypeToken<ArrayList<Delivery>>() {
+        }.getType();
+        confirmed = gson.fromJson(json, type);
+        if (confirmed == null) {
+            confirmed = new ArrayList<>();
         }
     }
 
@@ -122,17 +129,13 @@ public class DeliveryActivity extends AppCompatActivity {
                 personalDeliveries(documentSnapshot.getString("FullName"));
                 DeliveryListAdapter adapter = new DeliveryListAdapter(this, R.layout.delivery_card, userDeliveryList);
                 mListView.setAdapter(adapter);
-                //startActivity(new Intent(getApplicationContext(), StaffMainActivity.class));
-                //finish();
 
                 confirm();
 
 
             } else {
-                //Toast.makeText(DeliveryActivity.this, "Something Went Wrong " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
                 DeliveryListAdapter adapter = new DeliveryListAdapter(this, R.layout.delivery_card, deliveryList);
-                //startActivity(new Intent(getApplicationContext(), PatientMainActivity.class));
-                //finish();
+                mListView.setAdapter(adapter);
             }
         });
     }
@@ -151,7 +154,6 @@ public class DeliveryActivity extends AppCompatActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(confirmBtn.getContext());
             builder.setMessage("Confirm delivery?")
-                    //.setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -177,7 +179,8 @@ public class DeliveryActivity extends AppCompatActivity {
         for ( Delivery parcel : copyDeliveryList(deliveryList)) {
             confirmed.add(parcel);
             deliveryList.remove(parcel);
-            saveData();
+            saveData(deliveryList, "delivery list");
+            saveData(confirmed, "confirmed list");
         }
     }
 
