@@ -15,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -44,6 +47,9 @@ public class DeliveryActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private ListView mListView;
     private Button confirmBtn;
+    TabLayout tabLayout;
+    ViewPager2 viewPager2;
+    FragmentAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,40 @@ public class DeliveryActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager2 = findViewById(R.id.view_pager2);
+
+        FragmentManager fm = getSupportFragmentManager();
+        adapter = new FragmentAdapter(fm, getLifecycle());
+        viewPager2.setAdapter(adapter);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Delivery List"));
+        tabLayout.addTab(tabLayout.newTab().setText("Confirmed List"));
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager2.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+
+
         mListView = findViewById(R.id.listView);
         confirmBtn = findViewById(R.id.confirmBtn);
 

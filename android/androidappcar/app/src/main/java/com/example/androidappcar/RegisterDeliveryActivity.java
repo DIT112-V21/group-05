@@ -127,6 +127,11 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
                 case R.id.navCreateDel:
                     break;
 
+                case R.id.navDelList:
+                    Intent intent4 = new Intent(RegisterDeliveryActivity.this, DeliveryActivity.class);
+                    startActivity(intent4);
+                    break;
+
                 case R.id.navLogOutS:
                     FirebaseAuth.getInstance().signOut();
                     Intent intent3 = new Intent(RegisterDeliveryActivity.this, LoginActivity.class);

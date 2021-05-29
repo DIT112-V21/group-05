@@ -17,6 +17,12 @@
             />
 
         <item
+            android:id="@+id/navDelList"
+            android:icon="@drawable/ic_create_del"
+            android:title="Show Deliveries"
+            />
+
+        <item
             android:id="@+id/navLogOutS"
             android:icon="@drawable/ic_logout"
             android:title="Log Out"
