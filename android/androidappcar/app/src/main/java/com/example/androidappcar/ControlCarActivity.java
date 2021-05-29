@@ -121,13 +121,6 @@ public class ControlCarActivity extends AppCompatActivity {
                 startActivity(new Intent(ControlCarActivity.this, SpeedLimit.class));
             }
         });
-        connectionButton = findViewById(R.id.connectionButton);
-        connectionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ControlCarActivity.this, Connectivity.class));
-            }
-        });
         carStatus = findViewById(R.id.carStatus);
         connectToMqttBroker();
         doTheAutoRefresh();
