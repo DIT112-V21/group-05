@@ -1,9 +1,5 @@
 package com.example.androidappcar;
 
-import android.content.Context;
-
-import java.util.ArrayList;
-
 public class Delivery {
     String patient;
     String parcel;

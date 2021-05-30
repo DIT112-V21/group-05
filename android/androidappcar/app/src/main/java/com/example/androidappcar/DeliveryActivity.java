@@ -15,16 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -118,11 +113,6 @@ public class DeliveryActivity extends AppCompatActivity {
         }
     }
 
-
-    public void addDeliveryPage() {
-        Intent intent = new Intent(this, RegisterDeliveryActivity.class);
-        startActivity(intent);
-    }
     private void checkUserName(String uid) {
         DocumentReference df = fStore.collection("Users").document(uid);
 
