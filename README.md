@@ -24,7 +24,7 @@ The car uses the [SMCE](https://github.com/ItJustWorksTM/smce-gd/releases) emula
 The app uses [Android Studio](https://developer.android.com/studio?gclid=EAIaIQobChMI0eewkYHs8AIVgd-yCh2wugJREAAYASAAEgKKkvD_BwE&gclsrc=aw.ds) to run the app inside the built-in emulator of the software.
 
 ## Demo Video
-TBA
+The demo video is uploaded to youtube and it's streamed on that platform as well. By clicking [here](https://www.youtube.com/watch?v=XtVZ1C6n5tk) you will be redircted to the demo video for our project.
 
 ## Resources
 
