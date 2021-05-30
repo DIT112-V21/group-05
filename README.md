@@ -1,6 +1,7 @@
 # Group 05
 
-## Descirption
+## Description
+TBA
 
 ### What you are going to make?
 We are going to create a platform which is mainly aimed towards usage inside closed enviroments such as hospitals. The platform will include features that will let users control a delivery car remotely by relying on an interface that implements car controls as well as a camera. The camera will be used to navigate the car during the delivery while not having to rely on direct vision over the car to control it.
@@ -18,13 +19,18 @@ We are going to be using two emulators that will emulate both the wireless car a
 TBA
 
 ## Installation guide
-TBA
+Click [here](https://github.com/DIT112-V21/group-05/wiki/Installation-guide) to be redirected to a detailed installation guide.
 
 ### The Car
-TBA
+The car uses the [SMCE](https://github.com/ItJustWorksTM/smce-gd/releases) emulator to compile and emulate the sketches
 
 ### The App
-TBA
+The app uses [Android Studio](https://developer.android.com/studio?gclid=EAIaIQobChMI0eewkYHs8AIVgd-yCh2wugJREAAYASAAEgKKkvD_BwE&gclsrc=aw.ds) to run the app inside the built-in emulator of the software.
 
 # User Guide and instructions
-TBA
+* [Register Page](https://github.com/DIT112-V21/group-05/wiki/User-Manual---Register-Page)
+* [Log in Page](https://github.com/DIT112-V21/group-05/wiki/User-Manual-Log-in-page)
+* [Drawer Menu for Staff users](https://github.com/DIT112-V21/group-05/wiki/User-Manual---Staff-Drawer-Menu)
+* [Drawer Menu for Patient users](https://github.com/DIT112-V21/group-05/wiki/User-Manual---Patient-Drawer-Menu)
+* [Car Control User Interface](https://github.com/DIT112-V21/group-05/wiki/Car-Control-User-Interface)
+* [Delivery List](https://github.com/DIT112-V21/group-05/wiki/User-Manual-Delivery-List)
