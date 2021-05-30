@@ -15,7 +15,7 @@ public class FragmentAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-        if (position == 0) {
+        if (position == 1) {
             return new confirmedList();
         }
         return new deliveryList();

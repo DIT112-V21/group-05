@@ -128,7 +128,7 @@ public class RegisterDeliveryActivity extends DeliveryActivity {
                     break;
 
                 case R.id.navDelList:
-                    Intent intent4 = new Intent(RegisterDeliveryActivity.this, DeliveryActivity.class);
+                    Intent intent4 = new Intent(RegisterDeliveryActivity.this, DeliveryActivityStaff.class);
                     startActivity(intent4);
                     break;
 

@@ -1,5 +1,7 @@
 package com.example.androidappcar;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,17 +23,15 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class DeliveryActivity extends AppCompatActivity {
+public class DeliveryActivityStaff extends AppCompatActivity {
 
     ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
     ArrayList<Delivery> userDeliveryList = new ArrayList<Delivery>();
@@ -39,38 +39,84 @@ public class DeliveryActivity extends AppCompatActivity {
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
 
-
-
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private NavigationView navigationView;
     private ActionBarDrawerToggle toggle;
     private ListView mListView;
     private Button confirmBtn;
+    TabLayout tabLayout;
+    ViewPager2 viewPager2;
+    FragmentAdapter adapter;
 
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.delivery_main);
-        String uid = fAuth.getCurrentUser().getUid();
+        setContentView(R.layout.delivery_tab);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager2 = findViewById(R.id.view_pager2);
+
+        FragmentManager fm = getSupportFragmentManager();
+        adapter = new FragmentAdapter(fm, getLifecycle());
+        viewPager2.setAdapter(adapter);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Delivery List"));
+
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager2.setCurrentItem(tab.getPosition());
+                if(tab.getPosition()==1)
+                    loadData();
+                    adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
+
+
 
         mListView = findViewById(R.id.listView);
 
-        navigationView = findViewById(R.id.navViewPatient);
+        navigationView = findViewById(R.id.navViewStaff);
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
 
-                case R.id.navDeliveries:
+                case R.id.navControlCar:
+                    Intent intent2 = new Intent(DeliveryActivityStaff.this, ControlCarActivity.class);
+                    startActivity(intent2);
                     break;
 
-                case R.id.navLogOutP:
+                case R.id.navCreateDel:
+                    Intent intent5 = new Intent(DeliveryActivityStaff.this, RegisterDeliveryActivity.class);
+                    startActivity(intent5);
+                    break;
+
+                case R.id.navDelList:
+                    break;
+
+                case R.id.navLogOutS:
                     FirebaseAuth.getInstance().signOut();
-                    Intent intent3 = new Intent(DeliveryActivity.this, LoginActivity.class);
+                    Intent intent3 = new Intent(DeliveryActivityStaff.this, LoginActivity.class);
                     startActivity(intent3);
                     finish();
                     break;
@@ -79,16 +125,18 @@ public class DeliveryActivity extends AppCompatActivity {
             return false;
         });
 
-        drawer = findViewById(R.id.drawerLayoutPatient);
+        drawer = findViewById(R.id.drawerLayoutStaff);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
+        String uid = fAuth.getCurrentUser().getUid();
         loadData();
         checkUserName(uid);
     }
+
+
 
     void saveData(ArrayList<Delivery> saveList, String listTitle){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -132,10 +180,11 @@ public class DeliveryActivity extends AppCompatActivity {
 
             if (documentSnapshot.getString("isPatient") != null) {
                 confirmBtn = findViewById(R.id.confirmBtn);
-                Toast.makeText(DeliveryActivity.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DeliveryActivityStaff.this, "Welcome back " + documentSnapshot.getString("FullName"), Toast.LENGTH_SHORT).show();
                 personalDeliveries(documentSnapshot.getString("FullName"));
                 DeliveryListAdapter adapter = new DeliveryListAdapter(this, R.layout.delivery_card, userDeliveryList);
                 mListView.setAdapter(adapter);
+
 
                 confirm();
 
@@ -146,12 +195,12 @@ public class DeliveryActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     private void personalDeliveries(String patientName) {
         for (Delivery delivery : deliveryList) {
-           if (delivery.getPatient().equals(patientName)) {
+            if (delivery.getPatient().equals(patientName)) {
                 userDeliveryList.add(delivery);
-            } 
+            }
         }
     }
 
@@ -165,10 +214,7 @@ public class DeliveryActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(getApplicationContext(), "Confirmed", Toast.LENGTH_LONG).show();
-
                             delivered();
-                            mListView.setAdapter(null);
-                            mListView.setEmptyView(v);
 
                         }
                     })
@@ -209,3 +255,5 @@ public class DeliveryActivity extends AppCompatActivity {
         }
     }
 }
+
+

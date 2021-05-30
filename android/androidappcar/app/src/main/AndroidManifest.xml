@@ -18,6 +18,8 @@
         <activity android:name=".ControlCarActivity" />
         <activity android:name=".DeliveryActivity" />
         <activity android:name=".RegisterDeliveryActivity" />
+        <activity android:name=".DeliveryActivityStaff" />
+
         <activity
             android:name=".SpeedLimit"
             android:theme="@style/SpeedLimitTheme.CustomTheme" />
