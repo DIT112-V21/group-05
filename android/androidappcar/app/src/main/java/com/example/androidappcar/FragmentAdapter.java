@@ -14,15 +14,11 @@ public class FragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-
-        if (position == 1) {
-            return new confirmedList();
-        }
         return new deliveryList();
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 1;
     }
 }
