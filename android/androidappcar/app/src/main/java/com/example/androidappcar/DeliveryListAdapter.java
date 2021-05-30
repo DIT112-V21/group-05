@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 
 
@@ -43,11 +40,11 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery> {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
 
-        TextView tvPatient = (TextView) convertView.findViewById(R.id.textView1);
-        TextView tvParcel = (TextView) convertView.findViewById(R.id.textView2);
-        TextView tvLocation = (TextView) convertView.findViewById(R.id.textView3);
-        TextView tvDate = (TextView) convertView.findViewById(R.id.textView4);
-        TextView tvTime = (TextView) convertView.findViewById(R.id.textView5);
+        TextView tvPatient = convertView.findViewById(R.id.textView1);
+        TextView tvParcel = convertView.findViewById(R.id.textView2);
+        TextView tvLocation = convertView.findViewById(R.id.textView3);
+        TextView tvDate = convertView.findViewById(R.id.textView4);
+        TextView tvTime = convertView.findViewById(R.id.textView5);
 
         tvPatient.setText(patient);
         tvParcel.setText(parcel);

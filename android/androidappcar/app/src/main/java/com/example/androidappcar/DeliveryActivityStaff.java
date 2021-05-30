@@ -1,7 +1,5 @@
 package com.example.androidappcar;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -166,11 +164,6 @@ public class DeliveryActivityStaff extends AppCompatActivity {
         }
     }
 
-
-    public void addDeliveryPage() {
-        Intent intent = new Intent(this, RegisterDeliveryActivity.class);
-        startActivity(intent);
-    }
     private void checkUserName(String uid) {
         DocumentReference df = fStore.collection("Users").document(uid);
 

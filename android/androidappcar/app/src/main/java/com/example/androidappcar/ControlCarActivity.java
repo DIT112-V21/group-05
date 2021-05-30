@@ -16,13 +16,11 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -52,6 +50,10 @@ public class ControlCarActivity extends AppCompatActivity {
     private static int speedLimitForward = 70;
     private static int speedLimitBackwards = 30;
     private static final int TURN_LIMIT = 100;
+    private static final String FORWARD = "2";
+    private static final String REVERSE = "3";
+    private static final String RIGHT = "4";
+    private static final String LEFT = "5";
     private static final String STOP_TURN = "6";
     private static final String STOP_THROTTLE = "7";
     private static final String POWER_ON = "1";
@@ -229,12 +231,23 @@ public class ControlCarActivity extends AppCompatActivity {
         }
     }
 
-    public String increment(int pointer) {
+    void drive(String commandToSend, String actionDescription) {
+        if (!isConnected) {
+            final String notConnected = "Not connected (yet)";
+            Log.e(TAG, notConnected);
+            Toast.makeText(getApplicationContext(), notConnected, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Log.i(TAG, actionDescription);
+        mMqttClient.publish(MAIN_TOPIC + "/control/handleInput", commandToSend, QOS, null);
+    }
+
+    private String increment(String pointer) {
         final int INCREMENT_BY = 10;
         String result = " ";
         if(powerOn) {
             switch(pointer) {
-                case 2: // go forward
+                case "2": // go forward
                     if(reverse != 0){
                         reverse = reverse - INCREMENT_BY;
                         result = "3 " + reverse.toString();
@@ -247,7 +260,7 @@ public class ControlCarActivity extends AppCompatActivity {
                     result = "2 " + forward.toString();
                     mTextViewSpeed.setText(forward.toString());
                     break;
-                case 3: // go backwards
+                case "3": // go backwards
                     if(forward != 0){
                         forward = forward - INCREMENT_BY;
                         result = "2 " + forward.toString();
@@ -260,7 +273,7 @@ public class ControlCarActivity extends AppCompatActivity {
                     result = "3 " + reverse.toString();
                     mTextViewSpeed.setText(reverse.toString());
                     break;
-                case 4: // go right
+                case "4": // go right
                     if(left != 0){
                         left = left - INCREMENT_BY;
                         result = "5 " + left.toString();
@@ -273,7 +286,7 @@ public class ControlCarActivity extends AppCompatActivity {
                     result = "4 " + right.toString();
                     mTextViewTurnRight.setText(right.toString());
                     break;
-                case 5: // go left
+                case "5": // go left
                     if(right != 0){
                         right = right - INCREMENT_BY;
                         result = "4 " + right.toString();
@@ -288,35 +301,23 @@ public class ControlCarActivity extends AppCompatActivity {
                     break;
             }
         }
-
         return result;
     }
 
-    void drive(String throttleSpeed, String actionDescription) {
-        if (!isConnected) {
-            final String notConnected = "Not connected (yet)";
-            Log.e(TAG, notConnected);
-            Toast.makeText(getApplicationContext(), notConnected, Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Log.i(TAG, actionDescription);
-        mMqttClient.publish(MAIN_TOPIC + "/control/handleInput", throttleSpeed, QOS, null);
-    }
-
     public void forwardThrottle(View view) {
-        drive(increment(2), "Moving forward");
+        drive(FORWARD, "Moving forward");
     }
 
     public void reverseThrottle(View view) {
-        drive(increment(3), "Moving backwards");
+        drive(increment(REVERSE), "Moving backwards");
     }
 
     public void turnRight(View view) {
-        drive(increment(4), "Turning right");
+        drive(increment(RIGHT), "Turning right");
     }
 
     public void turnLeft(View view) {
-        drive(increment(5), "Turning left");
+        drive(increment(LEFT), "Turning left");
     }
 
     public void stop(View view) {
@@ -386,13 +387,4 @@ public class ControlCarActivity extends AppCompatActivity {
     public static void setSpeedLimitBackwards(Integer speedLimitBackwards2) {
         speedLimitBackwards = speedLimitBackwards2;
     }
-
-    public static void setExternalMqttBroker(String externalMqttBroker) {
-        EXTERNAL_MQTT_BROKER = externalMqttBroker;
-    }
-
-    public static void setMainTopic(String mainTopic) {
-        MAIN_TOPIC = mainTopic;
-    }
-
 }

@@ -44,14 +44,6 @@ public class MqttClient {
         }
     }
 
-    public void unsubscribe(String topic, IMqttActionListener unsubscriptionCallback) {
-        try {
-            mMqttAndroidClient.unsubscribe(topic, null, unsubscriptionCallback);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void publish(String topic, String message, int qos, IMqttActionListener publishCallback) {
         MqttMessage mqttMessage = new MqttMessage();
         mqttMessage.setPayload(message.getBytes());
